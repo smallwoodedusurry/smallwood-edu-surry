@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Temperance Industrial and Collegiate Institute — Living Archive</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@400;600&family=Old+Standard+TT:wght@400;700&family=IBM+Plex+Mono:wght@400;500&display=swap');
+
+  :root{
+    --ink: #1c2b24;
+    --parchment: #ede6d6;
+    --parchment-dim: #e2d9c4;
+    --brass: #8c6d3f;
+    --rust: #7a4b32;
+    --forest: #3e5c4e;
+    --line: rgba(28,43,36,0.18);
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{
+    background: var(--parchment);
+    color: var(--ink);
+    font-family: 'Source Serif 4', serif;
+    line-height: 1.6;
+  }
+  .wrap{max-width: 880px; margin: 0 auto; padding: 0 24px 80px;}
+
+  header.top{
+    border-bottom: 2px solid var(--ink);
+    padding: 40px 24px 24px;
+    text-align: center;
+  }
+  .eyebrow{
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--rust);
+    margin-bottom: 10px;
+  }
+  h1{
+    font-family: 'Old Standard TT', serif;
+    font-size: clamp(28px, 5vw, 44px);
+    font-weight: 700;
+    letter-spacing: 0.01em;
+  }
+  .sub{
+    font-size: 15px;
+    color: var(--forest);
+    margin-top: 8px;
+    font-style: italic;
+  }
+
+  nav.tabs{
+    display: flex;
+    justify-content: center;
+    gap: 2px;
+    border-bottom: 1px solid var(--line);
+    background: var(--parchment-dim);
+  }
+  nav.tabs button{
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    background: none;
+    border: none;
+    padding: 16px 18px;
+    cursor: pointer;
+    color: var(--forest);
+    border-bottom: 3px solid transparent;
+  }
+  nav.tabs button.active{
+    color: var(--ink);
+    border-bottom-color: var(--rust);
+    font-weight: 500;
+  }
+  nav.tabs button:hover{ color: var(--ink); }
+
+  section.panel{ display:none; padding-top: 40px; }
+  section.panel.active{ display:block; }
+
+  /* HOME */
+  .hero-quote{
+    font-family: 'Old Standard TT', serif;
+    font-size: 22px;
+    font-style: italic;
+    text-align: center;
+    padding: 20px 0 32px;
+    color: var(--forest);
+  }
+  .grid4{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+    margin-top: 24px;
+  }
+  .stamp-card{
+    border: 1px solid var(--ink);
+    padding: 18px;
+    position: relative;
+  }
+  .stamp-card::before{
+    content: attr(data-mark);
+    position: absolute;
+    top: 10px; right: 12px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    color: var(--brass);
+    letter-spacing: 0.05em;
+  }
+  .stamp-card h3{
+    font-family: 'Old Standard TT', serif;
+    font-size: 17px;
+    margin-bottom: 6px;
+  }
+  .stamp-card p{ font-size: 14px; color: var(--forest); }
+
+  /* TIMELINE */
+  .ledger{ border-top: 1px solid var(--ink); }
+  .entry{
+    display: grid;
+    grid-template-columns: 90px 1fr;
+    gap: 20px;
+    padding: 20px 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .entry .year{
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--rust);
+    padding-top: 2px;
+  }
+  .entry h4{
+    font-family: 'Old Standard TT', serif;
+    font-size: 18px;
+    margin-bottom: 4px;
+  }
+  .entry p{ font-size: 14.5px; }
+  .flag{
+    display: inline-block;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    border: 1px solid var(--brass);
+    color: var(--brass);
+    padding: 2px 8px;
+    margin-top: 8px;
+  }
+
+  /* ARCHIVE */
+  .doc-grid{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 18px;
+  }
+  .doc-card{
+    border: 1px solid var(--ink);
+    padding: 20px;
+    background: var(--parchment-dim);
+  }
+  .doc-card .tag{
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    text-transform: uppercase;
+    color: var(--forest);
+    margin-bottom: 10px;
+    display: block;
+  }
+  .doc-card h4{
+    font-family: 'Old Standard TT', serif;
+    font-size: 16px;
+    margin-bottom: 6px;
+  }
+  .doc-card p{ font-size: 13.5px; color: var(--ink); }
+  .rarity{ font-size: 12px; color: var(--rust); margin-top: 10px; font-style: italic; }
+
+  /* COMMUNITY */
+  form{ display: flex; flex-direction: column; gap: 14px; max-width: 520px; }
+  label{ font-family: 'IBM Plex Mono', monospace; font-size: 11px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--forest); }
+  input, textarea, select{
+    font-family: 'Source Serif 4', serif;
+    font-size: 15px;
+    padding: 10px 12px;
+    border: 1px solid var(--ink);
+    background: #fff;
+    color: var(--ink);
+  }
+  textarea{ min-height: 110px; resize: vertical; }
+  .submit-btn{
+    font-family: 'IBM Plex Mono', monospace;
+    text-transform: uppercase;
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    background: var(--ink);
+    color: var(--parchment);
+    border: none;
+    padding: 14px 20px;
+    cursor: pointer;
+    width: fit-content;
+    margin-top: 6px;
+  }
+  .submit-btn:hover{ background: var(--forest); }
+  .note{ font-size: 13px; color: var(--forest); font-style: italic; margin-top: 4px; }
+  .confirm{
+    display:none;
+    border: 1px solid var(--forest);
+    padding: 14px 18px;
+    margin-top: 16px;
+    font-size: 14px;
+  }
+  .form-embed{
+    border: 1px solid var(--ink);
+    background: #fff;
+    overflow: hidden;
+  }
+  .form-embed iframe{ display: block; }
+  a.fallback-link{
+    color: var(--rust);
+    font-weight: 600;
+  }
+
+  /* SUPPORT */
+  .tier-grid{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+  }
+  .tier{
+    border: 1px solid var(--ink);
+    padding: 22px 18px;
+    text-align: center;
+  }
+  .tier.featured{ border-width: 2px; border-color: var(--rust); }
+  .tier .badge{
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    color: var(--rust);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .tier h4{ font-family: 'Old Standard TT', serif; font-size: 18px; margin-bottom: 6px; }
+  .tier .price{ font-family: 'IBM Plex Mono', monospace; font-size: 20px; margin-bottom: 10px; }
+  .tier p{ font-size: 13px; color: var(--forest); }
+  .tier a{
+    display:block;
+    margin-top: 14px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: var(--ink);
+    border: 1px solid var(--ink);
+    padding: 8px;
+  }
+  .tier a:hover{ background: var(--ink); color: var(--parchment); }
+
+  h2.section-title{
+    font-family: 'Old Standard TT', serif;
+    font-size: 24px;
+    margin-bottom: 8px;
+  }
+  .section-sub{ font-size: 14px; color: var(--forest); margin-bottom: 28px; }
+
+  @media (max-width: 560px){
+    .grid4{ grid-template-columns: 1fr; }
+    .entry{ grid-template-columns: 70px 1fr; }
+    nav.tabs{ flex-wrap: wrap; }
+  }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="eyebrow">Est. 1892 · Claremont, Surry County, Virginia</div>
+  <h1>Temperance Industrial &amp; Collegiate Institute</h1>
+  <div class="sub">A living archive, preserved by the community it served</div>
+</header>
+
+<nav class="tabs">
+  <button class="tab-btn active" data-panel="home">Home</button>
+  <button class="tab-btn" data-panel="timeline">Timeline</button>
+  <button class="tab-btn" data-panel="archive">Archive</button>
+  <button class="tab-btn" data-panel="community">Community</button>
+  <button class="tab-btn" data-panel="support">Support</button>
+</nav>
+
+<div class="wrap">
+
+  <!-- HOME -->
+  <section class="panel active" id="home">
+    <p class="hero-quote">"Every record recovered is a name restored."</p>
+    <div class="grid4">
+      <div class="stamp-card" data-mark="§ 01">
+        <h3>The founding</h3>
+        <p>Dr. John Jefferson Smallwood established the Institute in 1892 to educate Black students in Surry County, Virginia.</p>
+      </div>
+      <div class="stamp-card" data-mark="§ 02">
+        <h3>Lincoln Memorial Hall</h3>
+        <p>Dedicated May 19–21, 1912 — one of Dr. Smallwood's last major public efforts before his death that September.</p>
+      </div>
+      <div class="stamp-card" data-mark="§ 03">
+        <h3>The receivership</h3>
+        <p>In 1913, Surry County Chancery Court placed the Institute's property in receivership. The full story is still being pieced together.</p>
+      </div>
+      <div class="stamp-card" data-mark="§ 04">
+        <h3>The revival</h3>
+        <p>A planned cultural center in Claremont will carry the Institute's name and mission forward.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- TIMELINE -->
+  <section class="panel" id="timeline">
+    <h2 class="section-title">Timeline</h2>
+    <p class="section-sub">Verified against primary sources where possible. Disputed points are marked.</p>
+    <div class="ledger">
+      <div class="entry">
+        <div class="year">1892</div>
+        <div>
+          <h4>Institute founded</h4>
+          <p>Dr. John Jefferson Smallwood establishes the Temperance Industrial and Collegiate Institute in Claremont.</p>
+        </div>
+      </div>
+      <div class="entry">
+        <div class="year">1901</div>
+        <div>
+          <h4>Letter to the Vice President</h4>
+          <p>Rosa E. Smallwood writes to Vice President Theodore Roosevelt on March 18, 1901, on behalf of the Institute.</p>
+        </div>
+      </div>
+      <div class="entry">
+        <div class="year">1912</div>
+        <div>
+          <h4>Lincoln Memorial Hall dedicated</h4>
+          <p>A three-day dedication, May 19–21, marked by a souvenir programme printed in Richmond by John Mitchell, Jr.</p>
+        </div>
+      </div>
+      <div class="entry">
+        <div class="year">1912</div>
+        <div>
+          <h4>Dr. Smallwood dies</h4>
+          <p>September 29, 1912 — roughly four months after the Hall's dedication.</p>
+        </div>
+      </div>
+      <div class="entry">
+        <div class="year">1913</div>
+        <div>
+          <h4>Property placed in receivership</h4>
+          <p>Surry County Chancery Court appoints a receiver over the Institute's property. The receiver's identity is still being researched.</p>
+          <span class="flag">Under research</span>
+        </div>
+      </div>
+      <div class="entry">
+        <div class="year">1913</div>
+        <div>
+          <h4>Possible charter reorganization</h4>
+          <p>A source suggests Rosa Smallwood may have reorganized the Institute's charter in January 1913 — this account conflicts with other records and is not yet resolved.</p>
+          <span class="flag">Disputed</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ARCHIVE -->
+  <section class="panel" id="archive">
+    <h2 class="section-title">Archive</h2>
+    <p class="section-sub">Primary sources and documents recovered so far.</p>
+    <div class="doc-grid">
+      <div class="doc-card">
+        <span class="tag">Souvenir programme</span>
+        <h4>Dedication of Lincoln Memorial Hall</h4>
+        <p>Published by the Institute, printed by John Mitchell, Jr. in Richmond. May 19–21, 1912.</p>
+        <p class="rarity">Held by one library worldwide (CARLI/I-Share, Illinois) — not yet digitized.</p>
+      </div>
+      <div class="doc-card">
+        <span class="tag">Correspondence</span>
+        <h4>Letter to Theodore Roosevelt</h4>
+        <p>Rosa E. Smallwood's March 18, 1901 letter to the Vice President, referencing the Institute's work.</p>
+      </div>
+      <div class="doc-card">
+        <span class="tag">Court record</span>
+        <h4>1913 receivership filing</h4>
+        <p>Surry County Chancery Court record placing the Institute's property under receivership.</p>
+        <p class="rarity">Receiver's identity pending confirmation.</p>
+      </div>
+      <div class="doc-card">
+        <span class="tag">Community history</span>
+        <h4>Claremont Plantation record</h4>
+        <p>Documentation of enslaved men from Claremont Plantation, tied to a Civil War-era incident at Jamestown Island.</p>
+      </div>
+      <div class="doc-card">
+        <span class="tag">Local history</span>
+        <h4>The Allen family of Surry County</h4>
+        <p>William Orgain Allen and the Allen family held an estimated 800–1,000 enslaved people across five counties, making them the dominant plantation holders in the region surrounding the Institute.</p>
+      </div>
+      <div class="doc-card">
+        <span class="tag">Local history</span>
+        <h4>John H. Ellis, landowner</h4>
+        <p>A free Black landowner in Surry County whose life and property offer context for the community the Institute was founded to serve.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- COMMUNITY -->
+  <section class="panel" id="community">
+    <h2 class="section-title">Community submissions</h2>
+    <p class="section-sub">Share a family story, photograph, or record. Submissions are reviewed before publication.</p>
+    <div class="form-embed">
+      <iframe
+        src="https://forms.gle/G52bqKTyEcFJRShf7"
+        width="100%"
+        height="900"
+        frameborder="0"
+        marginheight="0"
+        marginwidth="0"
+        title="Temperance Institute community submission form">
+        Loading form…
+      </iframe>
+    </div>
+    <p class="note">
+      Form not loading? <a class="fallback-link" href="https://forms.gle/G52bqKTyEcFJRShf7" target="_blank" rel="noopener">Open it in a new tab ↗</a>
+    </p>
+    <p class="note">Every submission is checked against existing research before it's added to the archive.</p>
+  </section>
+
+  <!-- SUPPORT -->
+  <section class="panel" id="support">
+    <h2 class="section-title">Support the project</h2>
+    <p class="section-sub">Membership funds research, preservation, and the planned cultural center in Claremont.</p>
+    <div class="tier-grid">
+      <div class="tier">
+        <div class="badge">Tier I</div>
+        <h4>Friend</h4>
+        <div class="price">$5/mo</div>
+        <p>Monthly research updates and early access to new archive finds.</p>
+        <a href="#">Join ↗</a>
+      </div>
+      <div class="tier featured">
+        <div class="badge">Most supportive · Tier II</div>
+        <h4>Steward</h4>
+        <div class="price">$15/mo</div>
+        <p>Everything in Friend, plus behind-the-scenes documentary footage.</p>
+        <a href="#">Join ↗</a>
+      </div>
+      <div class="tier">
+        <div class="badge">Tier III</div>
+        <h4>Patron</h4>
+        <div class="price">$40/mo</div>
+        <p>Everything above, plus a name credit in the documentary and cultural center.</p>
+        <a href="#">Join ↗</a>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<script>
+  const buttons = document.querySelectorAll('.tab-btn');
+  const panels = document.querySelectorAll('.panel');
+  buttons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      buttons.forEach(b => b.classList.remove('active'));
+      panels.forEach(p => p.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById(btn.dataset.panel).classList.add('active');
+    });
+  });
+
+</script>
+
+</body>
+</html>
