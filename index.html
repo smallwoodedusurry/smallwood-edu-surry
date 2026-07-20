@@ -158,9 +158,19 @@
   }
   .doc-card{
     border: 1px solid var(--ink);
-    padding: 20px;
+    padding: 0;
     background: var(--parchment-dim);
+    overflow: hidden;
   }
+  .doc-card img{
+    width: 100%;
+    height: 160px;
+    object-fit: cover;
+    display: block;
+    filter: grayscale(100%) contrast(1.05) sepia(0.15);
+    border-bottom: 1px solid var(--ink);
+  }
+  .doc-card .body{ padding: 20px; }
   .doc-card .tag{
     font-family: 'IBM Plex Mono', monospace;
     font-size: 10px;
@@ -370,36 +380,80 @@
     <p class="section-sub">Primary sources and documents recovered so far.</p>
     <div class="doc-grid">
       <div class="doc-card">
-        <span class="tag">Souvenir programme</span>
-        <h4>Dedication of Lincoln Memorial Hall</h4>
-        <p>Published by the Institute, printed by John Mitchell, Jr. in Richmond. May 19–21, 1912.</p>
-        <p class="rarity">Held by one library worldwide (CARLI/I-Share, Illinois) — not yet digitized.</p>
+        <img src="images/dr-smallwood-portrait.jpeg" alt="Portrait of Dr. John J. Smallwood, signed">
+        <div class="body">
+          <span class="tag">Portrait</span>
+          <h4>Dr. John J. Smallwood</h4>
+          <p>A signed portrait of the Institute's founder.</p>
+        </div>
       </div>
       <div class="doc-card">
-        <span class="tag">Correspondence</span>
-        <h4>Letter to Theodore Roosevelt</h4>
-        <p>Rosa E. Smallwood's March 18, 1901 letter to the Vice President, referencing the Institute's work.</p>
+        <img src="images/lincoln-hall-1.jpeg" alt="Lincoln Memorial Hall, front view, historic photograph">
+        <div class="body">
+          <span class="tag">Photograph</span>
+          <h4>Lincoln Memorial Hall</h4>
+          <p>The main hall building, dedicated May 19–21, 1912.</p>
+        </div>
       </div>
       <div class="doc-card">
-        <span class="tag">Court record</span>
-        <h4>1913 receivership filing</h4>
-        <p>Surry County Chancery Court record placing the Institute's property under receivership.</p>
-        <p class="rarity">Receiver's identity pending confirmation.</p>
+        <img src="images/lincoln-hall-2.jpeg" alt="Institute building overlooking the James River, historic photograph">
+        <div class="body">
+          <span class="tag">Photograph</span>
+          <h4>A view toward the James River</h4>
+          <p>One of the Institute's buildings, sited above the riverbank in Claremont.</p>
+        </div>
       </div>
       <div class="doc-card">
-        <span class="tag">Community history</span>
-        <h4>Claremont Plantation record</h4>
-        <p>Documentation of enslaved men from Claremont Plantation, tied to a Civil War-era incident at Jamestown Island.</p>
+        <img src="images/institute-broadside.jpeg" alt="Historical advertisement for the Temperance, Industrial and Collegiate Institute">
+        <div class="body">
+          <span class="tag">Broadside</span>
+          <h4>"For the welfare of the Negro youth"</h4>
+          <p>An original recruitment advertisement for the Institute, describing Old Bagley Hall (1821–1906) and the school's founding in 1892.</p>
+        </div>
       </div>
       <div class="doc-card">
-        <span class="tag">Local history</span>
-        <h4>The Allen family of Surry County</h4>
-        <p>William Orgain Allen and the Allen family held an estimated 800–1,000 enslaved people across five counties, making them the dominant plantation holders in the region surrounding the Institute.</p>
+        <div class="body">
+          <span class="tag">Souvenir programme</span>
+          <h4>Dedication of Lincoln Memorial Hall</h4>
+          <p>Published by the Institute, printed by John Mitchell, Jr. in Richmond. May 19–21, 1912.</p>
+          <p class="rarity">Held by one library worldwide (CARLI/I-Share, Illinois) — not yet digitized.</p>
+        </div>
       </div>
       <div class="doc-card">
-        <span class="tag">Local history</span>
-        <h4>John H. Ellis, landowner</h4>
-        <p>A free Black landowner in Surry County whose life and property offer context for the community the Institute was founded to serve.</p>
+        <div class="body">
+          <span class="tag">Correspondence</span>
+          <h4>Letter to Theodore Roosevelt</h4>
+          <p>Rosa E. Smallwood's March 18, 1901 letter to the Vice President, referencing the Institute's work.</p>
+        </div>
+      </div>
+      <div class="doc-card">
+        <div class="body">
+          <span class="tag">Court record</span>
+          <h4>1913 receivership filing</h4>
+          <p>Surry County Chancery Court record placing the Institute's property under receivership.</p>
+          <p class="rarity">Receiver's identity pending confirmation.</p>
+        </div>
+      </div>
+      <div class="doc-card">
+        <div class="body">
+          <span class="tag">Community history</span>
+          <h4>Claremont Plantation record</h4>
+          <p>Documentation of enslaved men from Claremont Plantation, tied to a Civil War-era incident at Jamestown Island.</p>
+        </div>
+      </div>
+      <div class="doc-card">
+        <div class="body">
+          <span class="tag">Local history</span>
+          <h4>The Allen family of Surry County</h4>
+          <p>William Orgain Allen and the Allen family held an estimated 800–1,000 enslaved people across five counties, making them the dominant plantation holders in the region surrounding the Institute.</p>
+        </div>
+      </div>
+      <div class="doc-card">
+        <div class="body">
+          <span class="tag">Local history</span>
+          <h4>John H. Ellis, landowner</h4>
+          <p>A free Black landowner in Surry County whose life and property offer context for the community the Institute was founded to serve.</p>
+        </div>
       </div>
     </div>
   </section>
