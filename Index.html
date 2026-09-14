@@ -411,6 +411,55 @@
   }
   .tier a:hover{ background: var(--ink); color: var(--parchment); }
 
+  .support-platform{ margin-bottom: 36px; }
+  .support-platform:last-child{ margin-bottom: 0; }
+  .platform-head{ display:flex; align-items:baseline; gap:10px; margin-bottom: 6px; flex-wrap:wrap; }
+  .platform-head h3{ font-family:'Old Standard TT', serif; font-size:20px; color:var(--forest-deep); }
+  .platform-head .platform-tag{
+    font-family:'IBM Plex Mono', monospace;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--brass);
+    border: 1px solid var(--brass);
+    border-radius: 20px;
+    padding: 2px 9px;
+  }
+  .gfm-card{
+    display:flex;
+    gap: 26px;
+    align-items:center;
+    flex-wrap:wrap;
+    border: 1px solid var(--line);
+    background: var(--paper);
+    border-radius: var(--radius);
+    padding: 22px;
+    box-shadow: var(--shadow-sm);
+  }
+  .gfm-card .gfm-qr{
+    flex: 0 0 150px;
+    width: 150px; height: 150px;
+    border-radius: 10px;
+    display:block;
+    box-shadow: var(--shadow-sm);
+  }
+  .gfm-card .gfm-text{ flex: 1; min-width: 220px; }
+  .gfm-card .gfm-text p{ font-size: 14px; color: var(--ink-soft); margin-bottom: 12px; }
+  .gfm-card .gfm-btn{
+    display:inline-block;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: var(--parchment);
+    background: var(--forest);
+    border: 1px solid var(--forest);
+    padding: 10px 16px;
+    border-radius: 6px;
+    transition: background .15s ease;
+  }
+  .gfm-card .gfm-btn:hover{ background: var(--forest-deep); }
+
   /* FOUNDER TAB */
   .founder-hero{ display:flex; gap: 26px; align-items:flex-start; margin-bottom: 10px; flex-wrap:wrap; }
   .founder-hero .imgwrap{ flex: 0 0 190px; cursor:zoom-in; border-radius: var(--radius); overflow:hidden; border:1px solid var(--line); box-shadow: var(--shadow-sm); }
@@ -1236,28 +1285,58 @@
   <!-- SUPPORT -->
   <section class="panel" id="support">
     <h2 class="section-title">Support the project</h2>
-    <p class="section-sub">Membership funds research, preservation, and the planned cultural center in Claremont.</p>
-    <div class="tier-grid">
-      <div class="tier">
-        <div class="badge">Tier I</div>
-        <h4>Friend</h4>
-        <div class="price">$5/mo</div>
-        <p>Monthly research updates and early access to new archive finds.</p>
-        <a href="#">Join ↗</a>
+    <p class="section-sub">Funding the documentary, the archival research behind it, and the effort to carry the Institute's name and mission forward.</p>
+
+    <div class="support-platform">
+      <div class="platform-head">
+        <h3>Patreon — ongoing membership</h3>
+        <span class="platform-tag">Monthly</span>
       </div>
-      <div class="tier featured">
-        <div class="badge">Most supportive · Tier II</div>
-        <h4>Steward</h4>
-        <div class="price">$15/mo</div>
-        <p>Everything in Friend, plus behind‑the‑scenes documentary footage.</p>
-        <a href="#">Join ↗</a>
+      <p class="body-text" style="margin-bottom:16px;">Membership funds the documentary and the research behind it, and gets you the process as it unfolds — not just the finished product someday.</p>
+      <div class="tier-grid">
+        <div class="tier">
+          <div class="badge">🕯️ Tier I</div>
+          <h4>Supporter</h4>
+          <div class="price">$3–5/mo</div>
+          <p>Behind‑the‑scenes production updates, archival finds as we uncover them, and early word on screenings and milestones.</p>
+          <a href="#">Join ↗</a>
+        </div>
+        <div class="tier">
+          <div class="badge">📖 Tier II</div>
+          <h4>Preservationist</h4>
+          <div class="price">$10–15/mo</div>
+          <p>Everything in Supporter, plus early access to rough‑cut clips, a name credit, and occasional research Q&amp;A posts.</p>
+          <a href="#">Join ↗</a>
+        </div>
+        <div class="tier featured">
+          <div class="badge">Most supportive · Tier III</div>
+          <h4>Founding Circle</h4>
+          <div class="price">$25/mo</div>
+          <p>Everything above, plus early/full access to the finished film, direct updates on the institute's revival, and a live Q&amp;A with the team.</p>
+          <a href="#">Join ↗</a>
+        </div>
+        <div class="tier">
+          <div class="badge">🌟 Tier IV</div>
+          <h4>Legacy Partner</h4>
+          <div class="price">$50+/mo</div>
+          <p>Everything above, plus a printed still or postcard from the Claremont site, a personal invitation to any relaunch event, and founding‑supporter recognition.</p>
+          <a href="#">Join ↗</a>
+        </div>
       </div>
-      <div class="tier">
-        <div class="badge">Tier III</div>
-        <h4>Patron</h4>
-        <div class="price">$40/mo</div>
-        <p>Everything above, plus a name credit in the documentary and cultural center.</p>
-        <a href="#">Join ↗</a>
+    </div>
+
+    <div class="support-platform">
+      <div class="platform-head">
+        <h3>GoFundMe — one‑time gifts</h3>
+        <span class="platform-tag">One‑time</span>
+      </div>
+      <p class="body-text" style="margin-bottom:16px;">For those who'd rather make a single gift than a monthly membership — every donation goes toward honoring Dr. Smallwood's legacy and carrying the Institute's name forward.</p>
+      <div class="gfm-card">
+        <img class="gfm-qr" src="images/gofundme-qr.png" alt="QR code to donate on GoFundMe">
+        <div class="gfm-text">
+          <p><strong>"Honoring Temperance Industrial &amp; Collegiate"</strong> — scan the code or use the link below to give directly.</p>
+          <a class="gfm-btn" href="https://gofund.me/e9402fb25" target="_blank" rel="noopener">Donate on GoFundMe ↗</a>
+        </div>
       </div>
     </div>
   </section>
