@@ -5,89 +5,170 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Temperance Industrial and Collegiate Institute — Living Archive</title>
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@400;600&family=Old+Standard+TT:wght@400;700&family=IBM+Plex+Mono:wght@400;500&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&family=Old+Standard+TT:wght@400;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
 
   :root{
     --ink: #1c2b24;
-    --parchment: #ede6d6;
-    --parchment-dim: #e2d9c4;
+    --ink-soft: #3a453f;
+    --parchment: #f1ead9;
+    --parchment-dim: #e6ddc8;
+    --paper: #faf6ec;
     --brass: #8c6d3f;
-    --rust: #7a4b32;
+    --rust: #a24a2d;
     --forest: #3e5c4e;
-    --line: rgba(28,43,36,0.18);
+    --forest-deep: #294238;
+    --line: rgba(28,43,36,0.16);
+    --shadow-sm: 0 1px 2px rgba(28,20,10,0.08);
+    --shadow-md: 0 6px 20px -6px rgba(28,20,10,0.22);
+    --shadow-lg: 0 20px 50px -12px rgba(28,20,10,0.35);
+    --radius: 10px;
   }
   *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
   body{
-    background: var(--parchment);
+    background:
+      radial-gradient(ellipse at top left, rgba(140,109,63,0.06), transparent 55%),
+      radial-gradient(ellipse at bottom right, rgba(62,92,78,0.07), transparent 55%),
+      var(--parchment);
     color: var(--ink);
     font-family: 'Source Serif 4', serif;
-    line-height: 1.6;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
   }
-  .wrap{max-width: 880px; margin: 0 auto; padding: 0 24px 80px;}
+  .wrap{max-width: 920px; margin: 0 auto; padding: 0 24px 100px;}
+  ::selection{ background: var(--rust); color: var(--paper); }
+
+  a{ color: var(--rust); }
 
   header.top{
-    border-bottom: 2px solid var(--ink);
-    padding: 40px 24px 24px;
+    position: relative;
+    padding: 56px 24px 30px;
     text-align: center;
+    overflow: hidden;
+  }
+  header.top::after{
+    content:"";
+    position:absolute; left:50%; bottom:0; transform:translateX(-50%);
+    width: 120px; height: 2px; background: var(--rust); opacity: 0.7;
   }
   .eyebrow{
     font-family: 'IBM Plex Mono', monospace;
     font-size: 12px;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
+    letter-spacing: 0.1em;
     color: var(--rust);
-    margin-bottom: 10px;
+    margin-bottom: 12px;
   }
   h1{
     font-family: 'Old Standard TT', serif;
-    font-size: clamp(28px, 5vw, 44px);
+    font-size: clamp(30px, 5.4vw, 48px);
     font-weight: 700;
-    letter-spacing: 0.01em;
+    letter-spacing: 0.005em;
+    color: var(--forest-deep);
   }
   .sub{
-    font-size: 15px;
+    font-size: 15.5px;
     color: var(--forest);
-    margin-top: 8px;
+    margin-top: 10px;
     font-style: italic;
+  }
+  .also-known{
+    font-size: 13px;
+    color: var(--ink-soft);
+    margin-top: 10px;
+    max-width: 560px;
+    margin-left:auto; margin-right:auto;
   }
 
   nav.tabs{
+    position: sticky; top: 0; z-index: 40;
     display: flex;
     justify-content: center;
+    flex-wrap: wrap;
     gap: 2px;
     border-bottom: 1px solid var(--line);
-    background: var(--parchment-dim);
+    background: rgba(241,234,217,0.86);
+    backdrop-filter: blur(10px) saturate(1.1);
+    -webkit-backdrop-filter: blur(10px) saturate(1.1);
   }
   nav.tabs button{
     font-family: 'IBM Plex Mono', monospace;
-    font-size: 12px;
-    letter-spacing: 0.08em;
+    font-size: 11.5px;
+    letter-spacing: 0.07em;
     text-transform: uppercase;
     background: none;
     border: none;
-    padding: 16px 18px;
+    padding: 16px 16px;
     cursor: pointer;
     color: var(--forest);
     border-bottom: 3px solid transparent;
+    transition: color .15s ease, border-color .15s ease;
   }
   nav.tabs button.active{
     color: var(--ink);
     border-bottom-color: var(--rust);
-    font-weight: 500;
+    font-weight: 600;
   }
   nav.tabs button:hover{ color: var(--ink); }
 
-  section.panel{ display:none; padding-top: 40px; }
-  section.panel.active{ display:block; }
+  section.panel{ display:none; padding-top: 44px; }
+  section.panel.active{ display:block; animation: fadeIn .35s ease; }
+  @keyframes fadeIn{ from{opacity:0; transform:translateY(6px);} to{opacity:1; transform:translateY(0);} }
+
+  h2.section-title{
+    font-family: 'Old Standard TT', serif;
+    font-size: 27px;
+    color: var(--forest-deep);
+    margin-bottom: 8px;
+  }
+  h3.sub-title{
+    font-family: 'Old Standard TT', serif;
+    font-size: 20px;
+    color: var(--forest-deep);
+    margin: 34px 0 12px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--line);
+  }
+  h3.sub-title:first-of-type{ margin-top: 6px; }
+  .section-sub{ font-size: 14.5px; color: var(--forest); margin-bottom: 30px; }
+  p.body-text{ font-size: 15.5px; margin-bottom: 14px; color: var(--ink); }
+  p.body-text:last-child{ margin-bottom: 0; }
+
+  .pull-quote{
+    font-family: 'Old Standard TT', serif;
+    font-size: 18px;
+    font-style: italic;
+    color: var(--forest-deep);
+    border-left: 3px solid var(--rust);
+    padding: 4px 0 4px 20px;
+    margin: 20px 0;
+  }
+  .pull-quote cite{
+    display:block; margin-top:8px; font-family:'IBM Plex Mono', monospace;
+    font-size: 11px; font-style: normal; letter-spacing: 0.04em; color: var(--brass);
+  }
+
+  .note-box{
+    border: 1px solid var(--brass);
+    background: rgba(140,109,63,0.08);
+    padding: 14px 18px;
+    border-radius: var(--radius);
+    font-size: 13.8px;
+    font-style: italic;
+    color: var(--ink-soft);
+    margin: 16px 0;
+  }
+  .note-box.disputed{ border-color: var(--rust); background: rgba(162,74,45,0.08); }
+  .note-box strong{ font-style: normal; }
 
   /* HOME */
   .hero-quote{
     font-family: 'Old Standard TT', serif;
-    font-size: 22px;
+    font-size: 23px;
     font-style: italic;
     text-align: center;
-    padding: 20px 0 32px;
-    color: var(--forest);
+    padding: 8px 10px 36px;
+    color: var(--forest-deep);
+    max-width: 620px; margin: 0 auto;
   }
   .grid4{
     display: grid;
@@ -96,14 +177,19 @@
     margin-top: 24px;
   }
   .stamp-card{
-    border: 1px solid var(--ink);
-    padding: 18px;
+    border: 1px solid var(--line);
+    background: var(--paper);
+    padding: 20px;
     position: relative;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-sm);
+    transition: box-shadow .2s ease, transform .2s ease;
   }
+  .stamp-card:hover{ box-shadow: var(--shadow-md); transform: translateY(-2px); }
   .stamp-card::before{
     content: attr(data-mark);
     position: absolute;
-    top: 10px; right: 12px;
+    top: 14px; right: 16px;
     font-family: 'IBM Plex Mono', monospace;
     font-size: 10px;
     color: var(--brass);
@@ -112,138 +198,194 @@
   .stamp-card h3{
     font-family: 'Old Standard TT', serif;
     font-size: 17px;
-    margin-bottom: 6px;
+    margin-bottom: 8px;
+    color: var(--forest-deep);
+    padding-right: 40px;
   }
   .stamp-card p{ font-size: 14px; color: var(--forest); }
 
+  .home-photo-row{
+    display:grid; grid-template-columns: repeat(4,1fr); gap: 12px; margin: 34px 0 8px;
+  }
+  .home-photo-row figure{ margin:0; cursor: zoom-in; border-radius: var(--radius); overflow:hidden; border:1px solid var(--line); background:var(--paper); box-shadow: var(--shadow-sm); }
+  .home-photo-row img{ width:100%; height:120px; object-fit:cover; display:block; filter: grayscale(100%) contrast(1.05) sepia(0.12); transition: transform .3s ease, filter .3s ease; }
+  .home-photo-row figure:hover img{ transform: scale(1.06); filter: grayscale(40%) contrast(1.05) sepia(0.12); }
+
   /* TIMELINE */
-  .ledger{ border-top: 1px solid var(--ink); }
-  .entry{
-    display: grid;
-    grid-template-columns: 90px 1fr;
-    gap: 20px;
-    padding: 20px 0;
-    border-bottom: 1px solid var(--line);
+  .timeline-rail{ position: relative; padding-left: 28px; }
+  .timeline-rail::before{
+    content:""; position:absolute; left: 6px; top: 6px; bottom: 6px; width: 2px;
+    background: linear-gradient(var(--brass), var(--forest));
+    opacity: 0.35;
   }
-  .entry .year{
+  .t-entry{ position: relative; padding: 0 0 30px 20px; }
+  .t-entry::before{
+    content:""; position:absolute; left: -28px; top: 4px; width: 11px; height: 11px;
+    border-radius: 50%; background: var(--paper); border: 2px solid var(--rust);
+  }
+  .t-entry.minor::before{ border-color: var(--brass); width:8px; height:8px; left:-26.5px; }
+  .t-year{
     font-family: 'IBM Plex Mono', monospace;
-    font-size: 15px;
-    font-weight: 500;
+    font-size: 13px;
+    font-weight: 600;
     color: var(--rust);
-    padding-top: 2px;
+    letter-spacing: 0.03em;
   }
-  .entry h4{
+  .t-entry h4{
     font-family: 'Old Standard TT', serif;
     font-size: 18px;
-    margin-bottom: 4px;
+    margin: 3px 0 6px;
+    color: var(--forest-deep);
   }
-  .entry p{ font-size: 14.5px; }
+  .t-entry p{ font-size: 14.5px; color: var(--ink); }
   .flag{
     display: inline-block;
     font-family: 'IBM Plex Mono', monospace;
-    font-size: 10px;
+    font-size: 9.5px;
     text-transform: uppercase;
     letter-spacing: 0.06em;
     border: 1px solid var(--brass);
     color: var(--brass);
-    padding: 2px 8px;
-    margin-top: 8px;
+    padding: 3px 8px;
+    border-radius: 20px;
+    margin-top: 9px;
+    margin-right: 6px;
   }
+  .flag.disputed{ border-color: var(--rust); color: var(--rust); }
+
+  /* TABLES */
+  table.data-table{ width:100%; border-collapse: collapse; margin: 14px 0 20px; font-size: 14px; }
+  table.data-table th, table.data-table td{ text-align:left; padding: 9px 12px; border-bottom: 1px solid var(--line); }
+  table.data-table th{ font-family:'IBM Plex Mono', monospace; font-size: 10.5px; text-transform: uppercase; letter-spacing:0.05em; color: var(--forest); background: rgba(62,92,78,0.06); }
+  table.data-table tr:hover td{ background: rgba(140,109,63,0.05); }
+
+  details.transcript{ margin: 16px 0; border:1px solid var(--line); border-radius: var(--radius); background: var(--paper); padding: 4px 0; }
+  details.transcript summary{ cursor:pointer; font-family:'IBM Plex Mono', monospace; font-size: 12px; text-transform: uppercase; letter-spacing:0.05em; color: var(--forest); padding: 12px 18px; }
+  details.transcript summary:hover{ color: var(--rust); }
+  details.transcript .transcript-body{ padding: 4px 22px 20px; font-size: 14.5px; }
+  details.transcript .transcript-body p{ margin-bottom: 12px; }
 
   /* ARCHIVE */
   .doc-grid{
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 18px;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 20px;
   }
   .doc-card{
-    border: 1px solid var(--ink);
+    border: 1px solid var(--line);
     padding: 0;
-    background: var(--parchment-dim);
+    background: var(--paper);
     overflow: hidden;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-sm);
+    transition: box-shadow .2s ease, transform .2s ease;
   }
+  .doc-card:hover{ box-shadow: var(--shadow-md); transform: translateY(-3px); }
+  .doc-card .imgwrap{ position:relative; overflow:hidden; cursor: zoom-in; background:#000; }
+  .doc-card .imgwrap::after{
+    content:"⤢ view"; position:absolute; right:8px; bottom:8px;
+    font-family:'IBM Plex Mono', monospace; font-size: 10px; letter-spacing:.05em;
+    color:#fff; background:rgba(28,43,36,0.7); padding:3px 8px; border-radius: 4px;
+    opacity:0; transition:opacity .2s ease;
+  }
+  .doc-card .imgwrap:hover::after{ opacity:1; }
   .doc-card img{
     width: 100%;
-    height: 160px;
+    height: 170px;
     object-fit: cover;
     display: block;
     filter: grayscale(100%) contrast(1.05) sepia(0.15);
-    border-bottom: 1px solid var(--ink);
+    transition: transform .35s ease, filter .35s ease;
   }
-  .doc-card .body{ padding: 20px; }
+  .doc-card .imgwrap:hover img{ transform: scale(1.05); filter: grayscale(35%) contrast(1.05) sepia(0.12); }
+  .doc-card .multi-strip{ display:flex; gap:2px; }
+  .doc-card .multi-strip .imgwrap{ flex:1; }
+  .doc-card .multi-strip img{ height: 170px; }
+  .doc-card .body{ padding: 18px 20px; }
   .doc-card .tag{
     font-family: 'IBM Plex Mono', monospace;
     font-size: 10px;
     text-transform: uppercase;
+    letter-spacing: 0.05em;
     color: var(--forest);
     margin-bottom: 10px;
     display: block;
   }
   .doc-card h4{
     font-family: 'Old Standard TT', serif;
-    font-size: 16px;
+    font-size: 16.5px;
     margin-bottom: 6px;
+    color: var(--forest-deep);
   }
   .doc-card p{ font-size: 13.5px; color: var(--ink); }
   .rarity{ font-size: 12px; color: var(--rust); margin-top: 10px; font-style: italic; }
+  .gallery-hint{ font-size: 11px; color: var(--brass); margin-top: 8px; font-family:'IBM Plex Mono', monospace; letter-spacing:.03em; }
+
+  /* LIGHTBOX */
+  .lightbox{
+    position: fixed; inset: 0; background: rgba(15,18,15,0.92);
+    display:none; align-items:center; justify-content:center; z-index: 100;
+    padding: 40px 20px;
+  }
+  .lightbox.open{ display:flex; }
+  .lightbox figure{ max-width: 90vw; max-height: 84vh; margin:0; text-align:center; }
+  .lightbox img{ max-width: 90vw; max-height: 74vh; object-fit: contain; border: 3px solid #fff; box-shadow: var(--shadow-lg); background:#fff; }
+  .lightbox figcaption{ color: #eee6d3; font-family:'IBM Plex Mono', monospace; font-size: 12.5px; margin-top: 14px; letter-spacing:.02em; }
+  .lightbox .lb-close{
+    position: absolute; top: 20px; right: 26px; background:none; border:none; color:#fff;
+    font-size: 30px; cursor: pointer; line-height:1; font-family: sans-serif; opacity:.85;
+  }
+  .lightbox .lb-close:hover{ opacity:1; }
+  .lightbox .lb-nav{
+    position:absolute; top:50%; transform:translateY(-50%);
+    background: rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.4); color:#fff;
+    width:44px; height:44px; border-radius:50%; cursor:pointer; font-size:20px;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .lightbox .lb-nav:hover{ background: rgba(255,255,255,0.22); }
+  .lightbox .lb-prev{ left: 18px; }
+  .lightbox .lb-next{ right: 18px; }
+  .lightbox .lb-count{ position:absolute; top:22px; left:26px; color:#cfc6ac; font-family:'IBM Plex Mono', monospace; font-size:11.5px; letter-spacing:.05em; }
 
   /* COMMUNITY */
-  form{ display: flex; flex-direction: column; gap: 14px; max-width: 520px; }
-  label{ font-family: 'IBM Plex Mono', monospace; font-size: 11px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--forest); }
-  input, textarea, select{
-    font-family: 'Source Serif 4', serif;
-    font-size: 15px;
-    padding: 10px 12px;
-    border: 1px solid var(--ink);
-    background: #fff;
-    color: var(--ink);
+  .form-embed{
+    border: 1px solid var(--line);
+    background: var(--paper);
+    overflow: hidden;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-sm);
   }
-  textarea{ min-height: 110px; resize: vertical; }
   .submit-btn{
     font-family: 'IBM Plex Mono', monospace;
     text-transform: uppercase;
     font-size: 12px;
     letter-spacing: 0.08em;
-    background: var(--ink);
-    color: var(--parchment);
+    background: var(--forest-deep);
+    color: var(--paper);
     border: none;
-    padding: 14px 20px;
+    padding: 14px 22px;
     cursor: pointer;
-    width: fit-content;
-    margin-top: 6px;
+    border-radius: 6px;
+    transition: background .15s ease;
   }
-  .submit-btn:hover{ background: var(--forest); }
+  .submit-btn:hover{ background: var(--rust); }
   .note{ font-size: 13px; color: var(--forest); font-style: italic; margin-top: 4px; }
-  .confirm{
-    display:none;
-    border: 1px solid var(--forest);
-    padding: 14px 18px;
-    margin-top: 16px;
-    font-size: 14px;
-  }
-  .form-embed{
-    border: 1px solid var(--ink);
-    background: #fff;
-    overflow: hidden;
-  }
-  .form-embed iframe{ display: block; }
-  a.fallback-link{
-    color: var(--rust);
-    font-weight: 600;
-  }
 
   /* SUPPORT */
   .tier-grid{
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 16px;
+    gap: 18px;
   }
   .tier{
-    border: 1px solid var(--ink);
-    padding: 22px 18px;
+    border: 1px solid var(--line);
+    background: var(--paper);
+    padding: 24px 18px;
     text-align: center;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-sm);
   }
-  .tier.featured{ border-width: 2px; border-color: var(--rust); }
+  .tier.featured{ border-width: 2px; border-color: var(--rust); box-shadow: var(--shadow-md); }
   .tier .badge{
     font-family: 'IBM Plex Mono', monospace;
     font-size: 10px;
@@ -251,50 +393,70 @@
     text-transform: uppercase;
     margin-bottom: 8px;
   }
-  .tier h4{ font-family: 'Old Standard TT', serif; font-size: 18px; margin-bottom: 6px; }
+  .tier h4{ font-family: 'Old Standard TT', serif; font-size: 18px; margin-bottom: 6px; color: var(--forest-deep); }
   .tier .price{ font-family: 'IBM Plex Mono', monospace; font-size: 20px; margin-bottom: 10px; }
   .tier p{ font-size: 13px; color: var(--forest); }
   .tier a{
     display:block;
-    margin-top: 14px;
+    margin-top: 16px;
     font-family: 'IBM Plex Mono', monospace;
     font-size: 11px;
     text-transform: uppercase;
     text-decoration: none;
     color: var(--ink);
     border: 1px solid var(--ink);
-    padding: 8px;
+    padding: 9px;
+    border-radius: 6px;
+    transition: background .15s ease, color .15s ease;
   }
   .tier a:hover{ background: var(--ink); color: var(--parchment); }
 
-  h2.section-title{
-    font-family: 'Old Standard TT', serif;
-    font-size: 24px;
-    margin-bottom: 8px;
-  }
-  .section-sub{ font-size: 14px; color: var(--forest); margin-bottom: 28px; }
+  /* FOUNDER TAB */
+  .founder-hero{ display:flex; gap: 26px; align-items:flex-start; margin-bottom: 10px; flex-wrap:wrap; }
+  .founder-hero .imgwrap{ flex: 0 0 190px; cursor:zoom-in; border-radius: var(--radius); overflow:hidden; border:1px solid var(--line); box-shadow: var(--shadow-sm); }
+  .founder-hero img{ width:190px; height:240px; object-fit:cover; display:block; filter: grayscale(100%) contrast(1.05) sepia(0.15); }
+  .founder-hero .fh-text{ flex:1; min-width:240px; }
+  .founder-hero .fh-text h2{ font-family:'Old Standard TT', serif; font-size:26px; color:var(--forest-deep); }
+  .founder-hero .fh-text .dates{ font-family:'IBM Plex Mono', monospace; font-size:13px; color:var(--rust); margin: 6px 0 12px; }
 
-  @media (max-width: 560px){
+  .source-list{ list-style: none; }
+  .source-list li{ font-size: 13.8px; padding: 9px 0; border-bottom: 1px solid var(--line); }
+  .source-list li:last-child{ border-bottom:none; }
+
+  .contact-grid{ display:grid; grid-template-columns: 1fr 1fr; gap: 10px 24px; font-size:14.5px; margin: 14px 0 6px;}
+  .contact-grid div strong{ display:block; font-family:'IBM Plex Mono', monospace; font-size:10.5px; text-transform:uppercase; letter-spacing:.05em; color:var(--forest); margin-bottom:3px; }
+
+  footer.site-footer{ text-align:center; padding: 40px 24px 60px; font-size:12.5px; color: var(--forest); font-family:'IBM Plex Mono', monospace; letter-spacing:.03em; }
+
+  @media (max-width: 640px){
     .grid4{ grid-template-columns: 1fr; }
-    .entry{ grid-template-columns: 70px 1fr; }
+    .home-photo-row{ grid-template-columns: repeat(2,1fr); }
     nav.tabs{ flex-wrap: wrap; }
+    .founder-hero{ flex-direction:column; align-items:center; text-align:center; }
+    .contact-grid{ grid-template-columns: 1fr; }
+    .lightbox .lb-nav{ width:38px; height:38px; font-size:16px; }
   }
 </style>
 </head>
 <body>
 
 <header class="top">
-  <div class="eyebrow">Est. 1892 · Claremont, Surry County, Virginia</div>
+  <div class="eyebrow">Est. 1892 · Claremont (Surry County), Virginia · Closed 1929</div>
   <h1>Temperance Industrial &amp; Collegiate Institute</h1>
   <div class="sub">A living archive, preserved by the community it served</div>
+  <div class="also-known">Later known as the Smallwood Memorial Institute, the Smallwood‑Corey Memorial Industrial and Collegiate Institute, and — under the Universal Negro Improvement Association — Universal Liberty University.</div>
 </header>
 
 <nav class="tabs">
   <button class="tab-btn active" data-panel="home">Home</button>
   <button class="tab-btn" data-panel="timeline">Timeline</button>
+  <button class="tab-btn" data-panel="founder">Founder</button>
+  <button class="tab-btn" data-panel="campus">Campus &amp; Curriculum</button>
   <button class="tab-btn" data-panel="archive">Archive</button>
+  <button class="tab-btn" data-panel="dedication">1912 Dedication</button>
   <button class="tab-btn" data-panel="community">Community</button>
   <button class="tab-btn" data-panel="support">Support</button>
+  <button class="tab-btn" data-panel="sources">Sources</button>
 </nav>
 
 <div class="wrap">
@@ -305,143 +467,641 @@
     <div class="grid4">
       <div class="stamp-card" data-mark="§ 01">
         <h3>The founding</h3>
-        <p>Dr. John Jefferson Smallwood established the Institute in 1892 to educate Black students in Surry County, Virginia.</p>
+        <p>Dr. John Jefferson Smallwood — born enslaved in 1863 — purchased 65¾ acres on the James River in 1891 and opened the Institute on October 12, 1892, with fewer than ten pupils and less than fifty dollars in cash.</p>
       </div>
       <div class="stamp-card" data-mark="§ 02">
         <h3>Lincoln Memorial Hall</h3>
-        <p>Dedicated May 19–21, 1912 — one of Dr. Smallwood's last major public efforts before his death that September.</p>
+        <p>Dedicated May 19–21, 1912 — a four‑story, $41,000 brick hall funded largely by Mrs. John Hay. Dr. Smallwood died four months later, on September 29, 1912, at age 49.</p>
       </div>
       <div class="stamp-card" data-mark="§ 03">
-        <h3>The receivership</h3>
-        <p>In 1913, Surry County Chancery Court placed the Institute's property in receivership. The full story is still being pieced together.</p>
+        <h3>Garvey, the UNIA, and closure</h3>
+        <p>In 1926 the Universal Negro Improvement Association bought the debt‑burdened campus and reopened it as Universal Liberty University. It never recovered from Garvey's imprisonment and the 1929 crash.</p>
       </div>
       <div class="stamp-card" data-mark="§ 04">
         <h3>The revival</h3>
-        <p>A planned cultural center in Claremont will carry the Institute's name and mission forward.</p>
+        <p>The campus was demolished by dynamite in 1941, but a planned cultural center in Claremont will carry the Institute's name and mission forward.</p>
       </div>
+    </div>
+
+    <div class="home-photo-row">
+      <figure data-lightbox="home1"><img src="images/img001.jpg" alt="Lincoln Memorial Hall"></figure>
+      <figure data-lightbox="home2"><img src="images/img002.jpg" alt="Dr. John J. Smallwood"></figure>
+      <figure data-lightbox="home3"><img src="images/img003.jpg" alt="Institute advertisement"></figure>
+      <figure data-lightbox="home4"><img src="images/img004.jpg" alt="Historical marker K-331"></figure>
     </div>
   </section>
 
   <!-- TIMELINE -->
   <section class="panel" id="timeline">
     <h2 class="section-title">Timeline</h2>
-    <p class="section-sub">Verified against primary sources where possible. Disputed points are marked.</p>
-    <div class="ledger">
-      <div class="entry">
-        <div class="year">1892</div>
-        <div>
-          <h4>Institute founded</h4>
-          <p>Dr. John Jefferson Smallwood establishes the Temperance Industrial and Collegiate Institute in Claremont.</p>
-        </div>
-      </div>
-      <div class="entry">
-        <div class="year">1901</div>
-        <div>
-          <h4>Letter to the Vice President</h4>
-          <p>Rosa E. Smallwood writes to Vice President Theodore Roosevelt on March 18, 1901, on behalf of the Institute.</p>
-        </div>
-      </div>
-      <div class="entry">
-        <div class="year">1912</div>
-        <div>
-          <h4>Lincoln Memorial Hall dedicated</h4>
-          <p>A three-day dedication, May 19–21, marked by a souvenir programme printed in Richmond by John Mitchell, Jr.</p>
-        </div>
-      </div>
-      <div class="entry">
-        <div class="year">1912</div>
-        <div>
-          <h4>Dr. Smallwood dies</h4>
-          <p>September 29, 1912 — roughly four months after the Hall's dedication.</p>
-        </div>
-      </div>
-      <div class="entry">
-        <div class="year">1913</div>
-        <div>
-          <h4>Property placed in receivership</h4>
-          <p>Surry County Chancery Court appoints a receiver over the Institute's property. The receiver's identity is still being researched.</p>
-          <span class="flag">Under research</span>
-        </div>
-      </div>
-      <div class="entry">
-        <div class="year">1913</div>
-        <div>
-          <h4>Possible charter reorganization</h4>
-          <p>A source suggests Rosa Smallwood may have reorganized the Institute's charter in January 1913 — this account conflicts with other records and is not yet resolved.</p>
-          <span class="flag">Disputed</span>
-        </div>
+    <p class="section-sub">Built primarily from the compiled research document (thesis, VCU Libraries, Surry County Historical Society, DHR Marker K‑331, and family‑history sources), cross‑checked against contemporary newspapers where possible. Disputed or unverified points are flagged individually.</p>
+
+    <div class="timeline-rail" id="timeline-rail">
+      <div class="t-entry minor">
+  <div class="t-year">1619</div>
+  <h4>First recorded arrival of enslaved Africans in Virginia</h4>
+  <p>Claremont sits near the landing site historically associated with the first recorded arrival of enslaved Africans in English North America — a resonance later drawn out by the Institute's own founding on this ground.</p>
+</div>
+
+<div class="t-entry minor">
+  <div class="t-year">June 12, 1621</div>
+  <h4>First recorded auction of an enslaved person in bondage</h4>
+  <p>The first recorded African captive sold into bondage in English North America is auctioned at Claremont, Virginia — on the very site Dr. Smallwood would purchase over two and a half centuries later for the Institute.</p>
+</div>
+
+<div class="t-entry">
+  <div class="t-year">Sept. 19, 1863</div>
+  <h4>John Jefferson Smallwood is born enslaved</h4>
+  <p>Born on the cotton plantation of Marcus W. Smallwood in Rich Square, Northampton County, North Carolina, to Mary Eliza and David Jefferson Smallwood. At five months old he was sold away from his parents along with the rest of his family.</p>
+</div>
+
+<div class="t-entry minor">
+  <div class="t-year">Oct. 1870</div>
+  <h4>Begins the Butler School, age seven</h4>
+  <p>Family tradition holds that plantation owner Marcus W. Smallwood arranged for the seven-year-old to attend the Butler School, a primary department of the Hampton Normal and Agricultural Institute.</p>
+  <span class="flag">Family tradition</span>
+</div>
+
+<div class="t-entry">
+  <div class="t-year">June 1871</div>
+  <h4>Marcus W. Smallwood dies</h4>
+  <p>Without a parent, guardian, or financial support, seven-year-old John Jefferson is told not to return to the Butler School. He begins teaching himself to read.</p>
+</div>
+
+<div class="t-entry minor">
+  <div class="t-year">c. 1873–1884</div>
+  <h4>Bound status, court challenge, and escape</h4>
+  <p>By Smallwood's own 1888–90 account: around age 10 he learned he was considered "bound" to his former master until age 21; at 14 he unsuccessfully challenged this in court; after two failed escape attempts and whippings, he succeeded on a third attempt near age 21, walking 125 miles from Scotland Neck, N.C., to Franklin, Va.</p>
+  <span class="flag disputed">Differs from later accounts</span>
+</div>
+
+<div class="t-entry minor">
+  <div class="t-year">1875–1882</div>
+  <h4>Claremont Manor becomes Claremont Colony</h4>
+  <p>William Orgain Allen, builder of nearby Bacon's Castle, dies in 1875; his heirs relinquish the Claremont Manor holdings. Joseph Franklin Mancha of Delaware purchases tracts of the former estate for colonization, 1879–1882.</p>
+</div>
+
+<div class="t-entry minor">
+  <div class="t-year">Jan. 16, 1886</div>
+  <h4>Town of Claremont incorporated</h4>
+  <p>Incorporated with ambitions of becoming a port city to rival Norfolk — an ambition never fully realized, though remnants of the old railroad and boat piers survive today.</p>
+</div>
+
+<div class="t-entry minor">
+  <div class="t-year">1886</div>
+  <h4>Enters Wilbraham Academy</h4>
+  <p>Smallwood enters Wilbraham Academy in Massachusetts with $14 in his pocket, having already lectured on temperance and labor issues throughout New England.</p>
+</div>
+
+<div class="t-entry minor">
+  <div class="t-year">c. 1888–1890</div>
+  <h4>"Was Born a Slave" newspaper interview</h4>
+  <p>A New England newspaper — likely The Boston Globe — publishes an extensive first-person interview with the by-then well-known young orator, detailing his enslavement and self-education. Read the full transcript in the Founder tab.</p>
+</div>
+
+<div class="t-entry">
+  <div class="t-year">Aug. 11, 1891</div>
+  <h4>Purchases the Claremont land</h4>
+  <p>Dr. Smallwood purchases 65¾ acres on the edge of Claremont, Virginia, on the James River, midway between Richmond and Norfolk.</p>
+</div>
+
+<div class="t-entry">
+  <div class="t-year">Oct. 12, 1892</div>
+  <h4>The Institute opens</h4>
+  <p>The Temperance Industrial and Collegiate Institute opens with fewer than ten pupils and less than fifty dollars in cash, holding classes in a dining hall on the property.</p>
+</div>
+
+<div class="t-entry minor">
+  <div class="t-year">June 21, 1894</div>
+  <h4>"A New Colored Leader"</h4>
+  <p>The Boston Evening Transcript profiles Smallwood and the young Institute for a New England readership.</p>
+</div>
+
+<div class="t-entry minor">
+  <div class="t-year">Jan. 19, 1895</div>
+  <h4>"He Made Friends"</h4>
+  <p>The Boston Globe covers Smallwood's fundraising success in New England — and a dispute over claims of racial "outrages" used in soliciting donations.</p>
+</div>
+
+<div class="t-entry minor">
+  <div class="t-year">April 1895</div>
+  <h4>Additional 36 acres purchased</h4>
+  <p>Smallwood purchases 36 more acres, including buildings and a wharf where, by local tradition, the first ship of enslaved Africans had docked.</p>
+</div>
+
+<div class="t-entry minor">
+  <div class="t-year">1895</div>
+  <h4>Sawyer Hall built</h4>
+  <p>Smallwood and his students build Sawyer Hall, a girls' dormitory named for Philetus Sawyer, a U.S. Senator from Wisconsin and a financial supporter.</p>
+</div>
+
+<div class="t-entry minor">
+  <div class="t-year">1896</div>
+  <h4>Susan B. Anthony donates library volumes</h4>
+  <p>Anthony inscribes volumes donated to the Institute's library — one of many notable donor relationships Smallwood cultivated through his lecture tours.</p>
+</div>
+
+<div class="t-entry">
+  <div class="t-year">Sept. 20, 1900</div>
+  <h4>Marries Rosa E. Banks</h4>
+  <p>Dr. Smallwood marries twenty-one-year-old Rosa E. Banks of Richmond, who becomes the Institute's Lady President.</p>
+</div>
+
+<div class="t-entry minor">
+  <div class="t-year">March 18, 1901</div>
+  <h4>Rosa writes to Vice President Roosevelt</h4>
+  <p>Facing $3,500 in debt with payments due within weeks, Rosa E. Smallwood writes directly to Vice President Theodore Roosevelt asking for help.</p>
+</div>
+
+<div class="t-entry minor">
+  <div class="t-year">1901</div>
+  <h4>Daughter Thelma Evelyn Smallwood is born</h4>
+  <p>Thelma (1901–1948) is the couple's first child.</p>
+</div>
+
+<div class="t-entry">
+  <div class="t-year">July 1902</div>
+  <h4>Formally chartered by Virginia</h4>
+  <p>The Institute receives its formal charter from the State of Virginia, a decade after opening.</p>
+</div>
+
+<div class="t-entry minor">
+  <div class="t-year">May 28, 1904</div>
+  <h4>"Old Wharf Where the First Slave Sold in Bondage"</h4>
+  <p>The Buffalo Evening News covers the Institute's historic wharf property and its need of repair funds.</p>
+</div>
+
+<div class="t-entry minor">
+  <div class="t-year">1906</div>
+  <h4>Son John J. Smallwood Jr. is born</h4>
+  <p>The same year, a Richmond Times-Dispatch advertisement runs describing the Institute "For the Moral, Religious, Educational and Industrial Welfare of the Negro Youth."</p>
+</div>
+
+<div class="t-entry minor">
+  <div class="t-year">1907</div>
+  <h4>John J. Smallwood Jr. dies in infancy</h4>
+  <p>The couple's son dies before his first birthday.</p>
+  <span class="flag">Noted in genealogical records only</span>
+</div>
+
+<div class="t-entry minor">
+  <div class="t-year">1910–11</div>
+  <h4>Lincoln Hall built; John Hay Wharf constructed</h4>
+  <p>Smallwood places the building contract with architect Carl Ruehrmund and contractor D. J. Farrar of Richmond. The John Hay Wharf is built in 1911 at a cost of $3,797, per the souvenir programme's own history.</p>
+</div>
+
+<div class="t-entry">
+  <div class="t-year">May 19–21, 1912</div>
+  <h4>Lincoln Memorial Hall dedicated</h4>
+  <p>A three-day dedication, presided over by Gov. William Hodges Mann, marks the completion of the Institute's largest building — a four-story, 133½ by 49½ foot brick, cement, and stone hall costing $45,987 (plus $15,800–$20,000 for the power house, water plant, and sewerage), funded largely by Mrs. Clara S. Hay. Events include a Sunday consecration service and Baccalaureate sermon, Monday's formal dedication of the hall, electric plant, and John Hay Wharf, an oratorical contest for the William's Prize, a Farmers' Congress, and Tuesday's Commencement Exercises for the Class of 1912. The New York Times and Richmond Planet both cover the event. That same year, a General Electric generating plant begins supplying electricity to the school and the town of Claremont. The original souvenir programme survives — see the Dedication Programme tab.</p>
+</div>
+
+<div class="t-entry minor">
+  <div class="t-year">May 25, 1912</div>
+  <h4>School property valued at $750,200</h4>
+  <p>Per the souvenir programme, the value of school property at the closing of the school year is recorded as $750,200 — a figure that would make the 1913 receivership crisis, just months later, especially striking.</p>
+</div>
+
+<div class="t-entry minor">
+  <div class="t-year">Sept. 14, 1912</div>
+  <h4>"I have ruined my health..."</h4>
+  <p>Fifteen days before his death, Smallwood writes: "I have ruined my health and my life trying to complete this work."</p>
+</div>
+
+<div class="t-entry">
+  <div class="t-year">Sept. 29, 1912</div>
+  <h4>Dr. Smallwood dies, age 49</h4>
+  <p>His death certificate lists "adhesion from appendicitis." Funeral services are held at Third Street A.M.E. Church in Richmond; his body is returned to the Institute by steamer for burial. Rosa Smallwood takes up leadership of the school.</p>
+</div>
+
+<div class="t-entry minor">
+  <div class="t-year">1913</div>
+  <h4>Property placed in receivership</h4>
+  <p>Surry County Chancery Court reportedly appoints a receiver over the Institute's property. This episode is not corroborated in the compiled research document used for most of this record; the receiver's identity remains unconfirmed.</p>
+  <span class="flag">Under research</span>
+</div>
+
+<div class="t-entry minor">
+  <div class="t-year">Jan. 1913</div>
+  <h4>Possible charter reorganization</h4>
+  <p>A separate source suggests Rosa Smallwood may have reorganized the Institute's charter this month — an account that conflicts with other records and remains unresolved.</p>
+  <span class="flag disputed">Disputed</span>
+</div>
+
+<div class="t-entry minor">
+  <div class="t-year">Early 1920</div>
+  <h4>New leadership arrives from Portsmouth</h4>
+  <p>Leadership connected to the Corey Memorial Institute of Portsmouth, Virginia — affiliated with the Norfolk Union Baptist Association — arrives in Claremont as the Baptist General Association purchases the Smallwood Memorial Institute's campus.</p>
+</div>
+
+<div class="t-entry">
+  <div class="t-year">May 1921</div>
+  <h4>Rechartered as Smallwood-Corey Memorial Institute</h4>
+  <p>The school is rechartered as the Smallwood-Corey Memorial Industrial and Collegiate Institute.</p>
+</div>
+
+<div class="t-entry minor">
+  <div class="t-year">April 1923</div>
+  <h4>Renamed again</h4>
+  <p>Shortened to the Smallwood-Corey Industrial Institute.</p>
+</div>
+
+<div class="t-entry minor">
+  <div class="t-year">c. 1925</div>
+  <h4>Trustees appeal to the UNIA</h4>
+  <p>Struggling against chronic debt, the Smallwood-Corey trustees appeal to Marcus Garvey's Universal Negro Improvement Association for financial help, through Rev. Dr. J. G. St. Clair Drake, who served simultaneously as the Institute's vice president and a UNIA organizer.</p>
+</div>
+
+<div class="t-entry">
+  <div class="t-year">1926</div>
+  <h4>The UNIA purchases the campus</h4>
+  <p>The UNIA buys the Claremont property for $7,300 and assumes between $53,000 and $55,000 of existing debt. The campus — valued at roughly $250,000 — includes Lincoln Hall (valued at about $100,000), which the UNIA renames Garvey Hall. The school reopens in September 1926 as Universal Liberty University, with Professor Caleb Robinson as principal and Rev. Dr. St. Clair Drake as vice principal.</p>
+</div>
+
+<div class="t-entry minor">
+  <div class="t-year">May 1927</div>
+  <h4>First commencement</h4>
+  <p>Universal Liberty University celebrates its first completed academic year, drawing UNIA leadership from around the country.</p>
+</div>
+
+<div class="t-entry">
+  <div class="t-year">Oct. 1929</div>
+  <h4>The university announces it will not reopen</h4>
+  <p>Garvey's imprisonment and deportation fracture UNIA leadership into competing factions, and the 1929 stock market crash delivers a final blow. <em>The Negro World</em> announces the school will not reopen pending reorganization — and it never does.</p>
+</div>
+
+<div class="t-entry minor">
+  <div class="t-year">1934</div>
+  <h4>Campus found dilapidated</h4>
+  <p>A former student and a former professor visit the abandoned campus and find the buildings already deteriorating.</p>
+</div>
+
+<div class="t-entry">
+  <div class="t-year">May 1937</div>
+  <h4>Property sold at auction for $100</h4>
+  <p>The 65¾-acre property is sold at public auction to H. C. Redd of Hanover County, Virginia. Smallwood's memorial monument is relocated to nearby Abundant Life Christian Church.</p>
+</div>
+
+<div class="t-entry">
+  <div class="t-year">June 1941</div>
+  <h4>Remaining buildings demolished</h4>
+  <p>The last campus buildings are demolished by controlled dynamite explosions, bringing a final end to the physical campus that began as Dr. Smallwood's 65¾-acre purchase fifty years earlier.</p>
+</div>
+
+<div class="t-entry minor">
+  <div class="t-year">2010</div>
+  <h4>Historical marker K-331 erected</h4>
+  <p>The Virginia Department of Historical Resources erects marker K-331 at the intersection of Rt. 10 &amp; Rt. 40, Colonial Trail West, Spring Grove, Virginia.</p>
+</div>
+
+<div class="t-entry minor">
+  <div class="t-year">Today</div>
+  <h4>A planned revival</h4>
+  <p>A planned cultural center in Claremont will carry the Institute's name and mission forward, alongside this ongoing community archive project.</p>
+</div>
+
+    </div>
+  </section>
+
+  <!-- FOUNDER -->
+  <section class="panel" id="founder">
+    <h2 class="section-title">Founder: Dr. John Jefferson Smallwood</h2>
+    <p class="section-sub">Enslaved as an infant, self‑taught as a child, and internationally known as an orator by his thirties — before founding one of Surry County's few schools for Black students.</p>
+
+    <div class="founder-hero">
+      <div class="imgwrap" data-lightbox="founder-portrait"><img src="images/img005.jpg" alt="Signed portrait of John J. Smallwood"></div>
+      <div class="fh-text">
+        <h2>John Jefferson Smallwood</h2>
+        <div class="dates">Sept. 19, 1863 — Sept. 29, 1912 · Rich Square, N.C. → Claremont, Va.</div>
+        <p class="body-text">Founder, president, and general financial agent of the Temperance Industrial and Collegiate Institute for its entire twenty‑year existence under his leadership, and — by the account of his own contemporaries — one of the most sought‑after Black orators in New England.</p>
       </div>
     </div>
+
+    <h3 class="sub-title">Early life and enslavement</h3>
+    <p class="body-text">John Jefferson Smallwood was born enslaved on September 19, 1863, on a cotton plantation in Rich Square, Northampton County, North Carolina, to Mary Eliza Smallwood and David Jefferson Smallwood. Family history, recorded in his descendant Mary E. C. Drew's biography <em>Divine Will, Restless Heart</em>, holds that his mother was the daughter of Nat Turner, the enslaved preacher who led the 1831 rebellion in Southampton County, Virginia. While he was still an infant, his parents and siblings were sold away — he later said he was only five months old.</p>
+    <div class="note-box"><strong>Family tradition, not independently verified:</strong> the Nat Turner lineage is carried down through Smallwood family history and Drew's biography, but has not been confirmed through contemporary documentation consulted for this record.</div>
+
+    <h3 class="sub-title">The Butler School and self-education</h3>
+    <p class="body-text">Family‑history sources hold that in the final months of the Civil War, the plantation owner Marcus W. Smallwood was aided by the young John Jefferson during a confrontation with Union troops, and in gratitude arranged in October 1870 for him — at age seven — to attend the Butler School, a primary department of the Hampton Normal and Agricultural Institute (today Hampton University).</p>
+    <div class="note-box"><strong>Unverified episode:</strong> this account is recounted in family‑history sources and has not been independently verified through contemporary documentation.</div>
+    <p class="body-text">Marcus W. Smallwood died in June 1871. Without a parent, guardian, or financial support, seven‑year‑old John Jefferson was told not to return to the Butler School. Undeterred, he taught himself by reading every newspaper and public speech he could find, and later claimed to have read his copy of Webster's Old Spelling Book a hundred times over.</p>
+    <div class="note-box"><strong>A differing first-person account:</strong> in an 1888–1890 newspaper interview (transcribed in full below), Smallwood himself dated his discovery of his "bound boy" status to around age 10, an unsuccessful court challenge to age 14, and his third and finally successful escape attempt to nearly age 21 — walking 125 miles from Scotland Neck, N.C., to Franklin, Va. This differs from the age‑seven account above drawn from later family‑history sources. Both are presented here rather than silently reconciled.</div>
+
+    <h3 class="sub-title">Education and life abroad</h3>
+    <p class="body-text">He went on to attend Hampton Institute, Shaw University, and Wesleyan Academy in Wilbraham, Massachusetts, and later lectured and studied abroad in England, France, and Germany — by some accounts conceiving the idea for his own school while studying at Trinity College, London. He earned a Ph.D. and was ordained a minister, and by the time he founded his school he was already recognized as one of the most eloquent African American orators in America and England. A contemporary newspaper interview described his oratory as "dignified and graceful," suggestive of Frederick Douglass, and quoted friends who believed that "in time he will surpass Douglass."</p>
+
+    <h3 class="sub-title">Founding the Institute</h3>
+    <p class="body-text">On August 11, 1891, Dr. Smallwood purchased 65¾ acres on the edge of Claremont, Virginia — a town with a port on the James River, situated midway between Richmond and Norfolk. There, on October 12, 1892, he opened the Temperance Industrial and Collegiate Institute with fewer than ten pupils and less than fifty dollars in cash, holding classes in a dining hall on the property. The school was formally chartered by the State of Virginia in July 1902.</p>
+    <p class="body-text">The institution's earliest name — the Temperance Industrial and Collegiate Institute — reflects a curriculum that clearly integrated both vocational and classical courses. Its mission, as stated in its Circular of Information, was to:</p>
+    <p class="pull-quote">"give its students a thorough mental, moral, industrial and religious training."</p>
+    <p class="body-text">An 1906 advertisement in the Educational Section of the Richmond Times‑Dispatch described the same mission more pointedly — "For the Moral, Religious, Educational and Industrial Welfare of the Negro Youth" — and warned that:</p>
+    <p class="pull-quote">"Smoking, Chewing Tobacco, Drinking Whiskey, Fighting, Laziness and Impure Living Will Not be Tolerated in Any Pupil."</p>
+
+    <h3 class="sub-title">Marriage and family</h3>
+    <p class="body-text">On September 20, 1900, Dr. Smallwood married twenty‑one‑year‑old Rosa E. Banks, daughter of Mat and Phyllis Banks of Richmond, Virginia. Rosa served as the Institute's Lady President and was described in the contemporary Black press as a brilliant essayist and a gifted scholar in her own right — in March 1901 she wrote directly to Vice President Theodore Roosevelt seeking emergency financial help for the school (see Archive). The couple had two children: a daughter, Thelma Evelyn Smallwood (1901–1948), and a son, John J. Smallwood Jr. (1906–1907), who died in infancy.</p>
+    <div class="note-box">The Surry County Historical Society's published account states the couple had no children besides Thelma; genealogical records (FamilySearch) additionally list the son John J. Smallwood Jr., who lived less than a year. The two accounts are not necessarily in conflict, as a public‑facing summary may simply omit an infant death recorded in vital records.</div>
+
+    <h3 class="sub-title">Death and memorial</h3>
+    <p class="body-text">Dr. Smallwood died on September 29, 1912, at age 49 — roughly four months after Lincoln Memorial Hall's dedication. His official death certificate listed the cause as "adhesion from appendicitis," though his Claremont neighbors believed it was the result of his having poured every piece of himself into the school he built, a belief he himself seemed to anticipate, having written on September 14, 1912:</p>
+    <p class="pull-quote">"I have ruined my health and my life trying to complete this work."</p>
+    <p class="body-text">Funeral services were held at Third Street African Methodist Episcopal Church (now Bethel A.M.E.) in Richmond, with eulogies delivered by George R. Hovey, president of Virginia Union University, and John Mitchell Jr., editor of the Richmond Planet. His body was returned to the Institute by steamer for burial. His gravestone, erected by friends and patrons, is inscribed "Founder and President of the Temperance, Industrial and Collegiate Institute" and "My work is finished."</p>
+
+    <div class="doc-grid" style="margin-top:18px;">
+      <div class="doc-card">
+        <div class="imgwrap" data-lightbox="grave"><img src="images/img006.jpg" alt="Smallwood gravestone inscription"></div>
+        <div class="body"><span class="tag">Memorial</span><h4>Dr. Smallwood's gravestone</h4><p>Click to view all three inscriptions.</p></div>
+      </div>
+      <div class="doc-card">
+        <div class="imgwrap" data-lightbox="rosa"><img src="images/img007.jpg" alt="Rosa E. Banks Smallwood"></div>
+        <div class="body"><span class="tag">Portrait</span><h4>Rosa E. Banks Smallwood</h4><p>The Institute's Lady President, who succeeded her husband as head of the school after his death in 1912.</p></div>
+      </div>
+    </div>
+
+    <details class="transcript">
+      <summary>Read the full 1888–1890 newspaper interview: "Was Born a Slave"</summary>
+      <div class="transcript-body">
+        <p><em>Transcription of a contemporary newspaper interview, likely The Boston Globe, based on internal references to "The Globe." This is Smallwood's own first‑person account, containing biographical detail — including the name of the slave trader who separated his family (A. B. Frutrel) and his mother's purchaser (John B. Johnson of El Paso, Texas) — not found in any other source in this record. See the note above on where it differs from later family‑history accounts.</em></p>
+        <p><strong>WAS BORN A SLAVE. Former Owner Still Claimed Him After War. Career of Brilliant Young Colored Orator. Triumphs Won by J. J. Smallwood in Face of Obstacles.</strong></p>
+        <p>Probably the best known young colored man in New England today is Mr. John Jefferson Smallwood. For the past four years he has been upon the platform, giving lectures upon the American colored man. That he is successful as a lecturer and popular as an orator is apparent from the fact that wherever he is announced to lecture, the houses are invariably filled.</p>
+        <p>He was born a slave, and when only five months old was torn from the arms of his mother, who was sent eventually to El Paso, Tex. From that day he never saw her until about a year ago, when he discovered her whereabouts, after the manner resorted to by freedmen who since the war have sought to reunite their scattered families, by continuous advertising.</p>
+        <p>In the meantime, Mr. Smallwood endeavored to so educate himself as to be able to rightly set forth the wrongs perpetrated upon his race. Hence he can be called a self‑made man. But through the broader knowledge which cultivated intelligence brings, Mr. Smallwood has not stopped at the race question, but has entered upon the agitation of temperance and labor, topics affecting American citizens, white and colored.</p>
+        <p>His style of oratory, which is dignified and graceful, is suggestive of that of Hon. Frederic Douglass, and his friends, of whom he has a host, numbering among them some of the leading men and women in New England, say that in time he will surpass Douglass. His voice is very deep. In speaking he uses many gestures, and illustrates and emphasizes his argument with witty anecdotes. He stands about 5 feet 8 inches. He is well built, his shoulders are square and he has a well‑formed head. His complexion is brown and he has expressive brown eyes.</p>
+        <p>Wilbraham, Mass., is Mr. Smallwood's New England home. At present he is visiting the family of William A. Smith of Randolph, where a visit was made to him a few days ago. When told that a request had been made by many readers of The Globe for a sketch of his life he said:</p>
+        <p>"There are, indeed, in New England many friends of mine who are truly interested in my welfare. How different it is now from when I first set my feet on New England soil. I thought that liberty dwelt on every tree top, mountain and valley, that everywhere here a man was a man. But after nine months' residence in Massachusetts I awoke to the fact that the spirit of prejudice against one of my race was almost as deep here as in Virginia.</p>
+        <p>"My awakening came about in this manner. When I first went to Greenfield, Mass., I was employed by a publishing company, and was to receive a certain sum per day and my board for my services. After I had worked there about nine months my employer told me he had concluded that I was objectionable to white help in his employ on account of my color. I was disheartened at first, but I took my money and returned South to Virginia. Since I have become more widely known there are undoubtedly many up there who wish they had not objected. But, after all, they knew not what they did. For New England and her people, with but few exceptions, I can only speak in the highest praise.</p>
+        <p>"I was born Sept. 19, 1863, a slave upon the plantation of Hon. Marcus W. Smallwood of Northampton, N. C., who was at that time representative to Congress from the second congressional district. His plantation was the largest cotton plantation in eastern North Carolina and was worked by hundreds of slaves. It was 25 miles from a railroad and 10 miles from a steamboat landing, the nearest river being the Roanoke. This district now, by the way, is represented by a colored man, Hon. H. P. Cheatham.</p>
+        <p>"My parents' names were David Jefferson and Mary Elizabeth Smallwood. The slaves usually took the names of the masters upon whose plantations they worked. I am the youngest of eight children, five sisters and three brothers. When I was a babe 5 months and 10 days old, both of my parents were sold to a slave trader named A. B. Frutrel and carried to Birmingham, Ala., where they were separated. My mother was sold to John B. Johnson of El Paso, Tex. She never saw my father again. He was carried to Louisville, Ky., where he was afterward sold, and what became of him I have never learned, for I can trace him no farther.</p>
+        <p>"A little over a year ago I found my mother, who had with her two of my sisters at El Paso. Of the rest of our scattered family I have not yet learned the whereabouts. This is only an instance of the hundreds of colored families who through cruel slavery have become scattered. It is true that some have become reunited, but the majority never will meet their loved ones again.</p>
+        <p>"After my parents were taken away from me I was left on the plantation in the care of the 'mammies.' The war had closed and on every hand the wildest desolation prevailed. At the age of 10 years, after having been permitted to roam around the plantation at will, I found that my former master claimed that I was bound to him until I was 21. At the age of 14 years I questioned this right in court. It was decided that as my master was a man of undoubted integrity that right was unquestioned, and I must stay with him until I was 21 years old. Twice I attempted to run away, but was caught and rebuked with a whipping. The third time I attempted I was nearly 21 years old. This time I was successful, and walked from Scotland Neck, N. C., to Franklin, Va., a distance of 125 miles.</p>
+        <p>"When I was about 13 years old I accidentally got hold of an old Webster's spelling book. With this book, and in secret, I learned the alphabet, and then to form letters into words.</p>
+        <p>"While at Franklin I began a temperance movement, which assumed large proportions. At one of my meetings there was present a young man named William B. Davis of Malden, Mass. He came to me at the close of the meeting and said: 'Why don't you go North and educate yourself?' I replied that I had neither money, parents nor friends to help me, and that Bryant Farmer, my employer, had failed to pay me in cash and there was no way of my getting North.</p>
+        <p>"He then gave me the address of Ira G. Ross, pastor of the First M. E. church, Greenfield, Mass., and told me to write to that gentleman, as he was interested in the general welfare of my race. As I had learned to write during my leisure hours while at work, I wrote to Mr. Ross. He in reply told me to come to New England, and after learning my financial condition sent me $25. With this same sum I reached Greenfield, Mass. Dr. Crowell of Lynn, hearing how I was treated there, became my benefactor.</p>
+        <p>"In 1886 I entered Wilbraham Academy with $14 in my pocket. That same year I returned to Franklin and became engaged in the local option contest in the second congressional district of that State. I was put in nomination for Congress against Mahone, but declined the honor, until I have become an educated man. After being mobbed in Virginia, I returned North and resumed my studies, aiding myself by lecturing in various churches and other organizations throughout New England, lecturing upon the American…" <em>[article continues beyond this clipping]</em></p>
+        <div class="doc-grid">
+          <div class="doc-card"><div class="imgwrap" data-lightbox="interview1"><img src="images/img008.jpg" alt="Was Born a Slave headline"></div><div class="body"><span class="tag">Clipping</span><h4>Headline &amp; opening</h4></div></div>
+          <div class="doc-card"><div class="imgwrap" data-lightbox="interview2"><img src="images/img009.jpg" alt="Interview column"></div><div class="body"><span class="tag">Clipping</span><h4>Full scan, cols. 1–2</h4></div></div>
+          <div class="doc-card"><div class="imgwrap" data-lightbox="interview3"><img src="images/img010.jpg" alt="Interview column"></div><div class="body"><span class="tag">Clipping</span><h4>Full scan, cols. 3–4</h4></div></div>
+          <div class="doc-card"><div class="imgwrap" data-lightbox="interview4"><img src="images/img011.jpg" alt="Interview column"></div><div class="body"><span class="tag">Clipping</span><h4>Full scan, cols. 5–6</h4></div></div>
+        </div>
+      </div>
+    </details>
+  </section>
+
+  <!-- CAMPUS & CURRICULUM -->
+  <section class="panel" id="campus">
+    <h2 class="section-title">Campus &amp; Curriculum</h2>
+    <p class="section-sub">A self-sufficient working campus that paired classical, collegiate coursework with industrial and agricultural training — an unusual hybrid for its era.</p>
+
+    <h3 class="sub-title">From Claremont Manor to Claremont Colony</h3>
+    <p class="body-text">The land Dr. Smallwood eventually purchased had passed through several owners shortly before his arrival. William Orgain Allen, the first builder and owner of nearby Bacon's Castle, died in 1875, and his eldest son — also named William — settled in New York and relinquished the family's Claremont Manor holdings. Between 1879 and 1882, Joseph Franklin Mancha of Delaware — for whom Mancha Drive is named — purchased tracts of the former Claremont Manor estate from the Allen family for colonization purposes. The town of Claremont was formally incorporated on January 16, 1886, with ambitions of becoming a port city to rival Norfolk; though that larger ambition was never realized, remnants of the old railroad and boat piers survive today.</p>
+
+    <h3 class="sub-title">Buildings and infrastructure</h3>
+    <p class="body-text">By the time of Dr. Smallwood's death, the campus had grown to more than sixty‑five acres along the James River and encompassed fourteen buildings. Lincoln Memorial Hall, the Institute's largest academic building, was a four‑story brick structure appraised at $41,000 in 1912 and covered at the time by both The New York Times and the Richmond Planet. Bagley Hall stood among the residential and instructional buildings sited along the bluffs of the James River. Dr. Smallwood also installed a General Electric generating plant on campus in 1912, complete with street lights, poles, transformers, and meters — supplying electricity not only to the school but to the surrounding town of Claremont for years afterward. Because the Institute operated without public funding for its entire thirty‑six years, Dr. Smallwood personally carried the burden of keeping it financially afloat, traveling widely to lecture and raising substantial sums from donors.</p>
+
+    <div class="doc-grid">
+      <div class="doc-card"><div class="imgwrap" data-lightbox="lincoln"><img src="images/img012.jpg" alt="Lincoln Memorial Hall"></div><div class="body"><span class="tag">Photograph</span><h4>Lincoln Memorial Hall</h4><p>Dedicated May 19–21, 1912; renamed Garvey Hall by the UNIA in 1926.</p></div></div>
+      <div class="doc-card"><div class="imgwrap" data-lightbox="bagley"><img src="images/img013.jpg" alt="Bagley Hall"></div><div class="body"><span class="tag">Photograph</span><h4>Bagley Hall</h4><p>Sited above the riverbank in Claremont, overlooking the James River.</p></div></div>
+    </div>
+
+    <h3 class="sub-title">Industrial department</h3>
+    <p class="body-text">Industrial and agricultural training formed a significant part of the Institute's program. The first major capital expenditure — funds raised by Smallwood through years of lecturing — went specifically toward the school farm. Treasurer Emmet Ellis wrote that "the institution has a good farm fronting the James River, upon which is cultivated corn, potatoes and vegetables." The campus operated as a largely self‑sufficient community, combining academic halls with working industrial and agricultural operations that fed, housed, and trained its students: a mattress‑making facility, a canning operation, a saw mill, a working farm, a shoemaking operation, a printing press producing the school's own newspaper, and dormitory rooms for resident students. An inventory of school property taken after Smallwood's death lists livestock, farm implements, and crops of peanuts and potatoes.</p>
+    <table class="data-table">
+      <tr><th>Young women</th><th>Young men</th></tr>
+      <tr><td>Plain sewing and fancy needlework, cooking, laundering, house cleaning</td><td>Farming, shoemaking, and other vocations</td></tr>
+    </table>
+    <p class="body-text">According to Ellis, the school existed "to teach the Negro self‑reliance, race pride and a practical trade, to establish…various industries, house cleaning and scientific cooking, general laundry work upon a business scale."</p>
+
+    <h3 class="sub-title">Collegiate department</h3>
+    <p class="body-text">A notable feature that distinguished Smallwood's school from strictly industrial schools like Hampton was its robust collegiate curriculum. The school offered three years of high‑school training in addition to four years of college coursework, with students required to take courses including English Literature, Natural Philosophy, and Political Economy. Students came not only from nearby Virginia towns but from as far away as New York City, Washington, D.C., and Louisville, Kentucky. The word "Normal" was conspicuously absent from the school's name, indicating that administrators chose not to emphasize teacher education as the school's primary purpose — even though some graduates did become teachers.</p>
+
+    <h3 class="sub-title">Graduate outcomes, 1892–1903</h3>
+    <p class="body-text">Treasurer Ellis recorded the following occupational outcomes for graduates in the school's first eleven years of operation. This diversity of outcomes reflects the Institute's hybrid industrial‑collegiate mission; across its full history, more than 2,000 students passed through the school in total.</p>
+    <table class="data-table">
+      <tr><th>Number</th><th>Occupation</th></tr>
+      <tr><td>59</td><td>Purchased farms</td></tr>
+      <tr><td>17</td><td>Tradesmen of various kinds</td></tr>
+      <tr><td>12</td><td>Grade school teachers</td></tr>
+      <tr><td>8</td><td>High school teachers and hotel waiters</td></tr>
+      <tr><td>7</td><td>Ministers of the Gospel</td></tr>
+      <tr><td>4</td><td>Blacksmiths</td></tr>
+      <tr><td>3</td><td>Carpenters</td></tr>
+      <tr><td>2</td><td>Doctors</td></tr>
+      <tr><td>2</td><td>Temperance lecturers</td></tr>
+      <tr><td>1</td><td>Lawyer</td></tr>
+    </table>
+
+    <h3 class="sub-title">Governance and the Monthly Advocate</h3>
+    <p class="body-text">The Institute published its own school newspaper, The Monthly Advocate, printed on the campus's own press and giving students hands‑on training in typesetting alongside the school's other trades. The Institute was governed by a Board of Trustees drawn from Virginia, New York, and North Carolina, reflecting the geographic reach of Smallwood's fundraising network.</p>
+    <table class="data-table">
+      <tr><th>Name</th><th>Role</th><th>Location</th></tr>
+      <tr><td>Rev. John J. Smallwood</td><td>President</td><td>Claremont, Va.</td></tr>
+      <tr><td>P. Emmett Ellis</td><td>Treasurer</td><td>Scotland, Va.</td></tr>
+      <tr><td>John W. Peterson</td><td>Trustee</td><td>Buffalo, N.Y.</td></tr>
+      <tr><td>Geo. W. Thomas, Sr.</td><td>Trustee</td><td>Smithfield, Va.</td></tr>
+      <tr><td>Hon. W. B. Clark</td><td>Trustee</td><td>Newport News, Va.</td></tr>
+      <tr><td>Hon. J. E. Farrell</td><td>Trustee</td><td>Claremont, Va.</td></tr>
+      <tr><td>Hon. Wm. W. Lawrence</td><td>Trustee</td><td>North Carolina</td></tr>
+      <tr><td>Mrs. E. M. Combs</td><td>Trustee</td><td>Claremont, Va.</td></tr>
+    </table>
+    <p class="note-box">P. Emmett Ellis, listed here as Treasurer of Scotland, Virginia, is very likely the same Emmet Ellis whose written accounts of the Institute's farm, industries, and graduate outcomes are quoted throughout this record.</p>
+
+    <h3 class="sub-title">Fundraising and donors</h3>
+    <p class="body-text">Like most African American schools of the era, the Institute relied exclusively on the largesse of individual donors rather than a major benevolent organization. Smallwood lectured throughout the United States and abroad, writing countless fundraising letters to acquaintances and public figures, including John Milton Hay (former U.S. Ambassador to Great Britain and Secretary of State, and a financial donor whose wife funded Lincoln Memorial Hall), Henry Cook of Lenox, Massachusetts, Emily Howland, Catherine Peterson, Susan B. Anthony (who inscribed donated volumes to the Institute's library in 1896), and Elizabeth Cady Stanton and Frederick Douglass, among Smallwood's fundraising correspondents. The school was chronically in debt throughout its existence, and this financial pressure meant that donor preferences inevitably influenced its educational direction.</p>
+
+    <h3 class="sub-title">Historical significance</h3>
+    <p class="body-text">Historian Benjamin Swenson argues that the Institute "arguably forged a unique model of education by integrating distinct combinations of both academic and industrial training." Rather than strictly following the Hampton‑Tuskegee model of industrial education or the classical curriculum championed by W. E. B. Du Bois, Smallwood's school blended both — reflecting the broader, contested landscape of African American education in the post‑Reconstruction South. The location carried its own historical resonance: Claremont sits near the landing site associated with the first recorded arrival of enslaved Africans in Virginia in 1619, and Smallwood himself was, by family tradition, a direct descendant of Nat Turner — linking his project of Black education and uplift to the region's deepest histories of bondage and resistance.</p>
   </section>
 
   <!-- ARCHIVE -->
   <section class="panel" id="archive">
     <h2 class="section-title">Archive</h2>
-    <p class="section-sub">Primary sources and documents recovered so far.</p>
+    <p class="section-sub">Primary sources and documents recovered so far. Click any image to enlarge; multi-image documents can be paged through.</p>
     <div class="doc-grid">
+
       <div class="doc-card">
-        <img src="images/dr-smallwood-portrait.jpeg" alt="Portrait of Dr. John J. Smallwood, signed">
+        <div class="imgwrap" data-lightbox="portrait"><img src="images/img014.jpg" alt="Portrait of Dr. John J. Smallwood"></div>
         <div class="body">
           <span class="tag">Portrait</span>
           <h4>Dr. John J. Smallwood</h4>
           <p>A signed portrait of the Institute's founder.</p>
         </div>
       </div>
+
       <div class="doc-card">
-        <img src="images/lincoln-hall-1.jpeg" alt="Lincoln Memorial Hall, front view, historic photograph">
+        <div class="imgwrap" data-lightbox="lincoln"><img src="images/img015.jpg" alt="Lincoln Memorial Hall"></div>
         <div class="body">
           <span class="tag">Photograph</span>
           <h4>Lincoln Memorial Hall</h4>
-          <p>The main hall building, dedicated May 19–21, 1912.</p>
+          <p>The main hall building, dedicated May 19–21, 1912; appraised at $41,000.</p>
         </div>
       </div>
+
       <div class="doc-card">
-        <img src="images/bagley-hall.jpeg" alt="Bagley Hall overlooking the James River, historic photograph">
+        <div class="imgwrap" data-lightbox="bagley"><img src="images/img016.jpg" alt="Bagley Hall"></div>
         <div class="body">
           <span class="tag">Photograph</span>
           <h4>Bagley Hall</h4>
-          <p>One of the Institute's original buildings, sited above the riverbank in Claremont, overlooking the James River.</p>
+          <p>One of the Institute's original buildings, sited above the riverbank overlooking the James River.</p>
         </div>
       </div>
+
       <div class="doc-card">
-        <img src="images/institute-broadside.jpeg" alt="Historical advertisement for the Temperance, Industrial and Collegiate Institute">
+        <div class="imgwrap" data-lightbox="broadside"><img src="images/img017.jpg" alt="Institute advertisement"></div>
         <div class="body">
           <span class="tag">Broadside</span>
           <h4>"For the welfare of the Negro youth"</h4>
-          <p>An original recruitment advertisement for the Institute, describing Old Bagley Hall (1821–1906) and the school's founding in 1892.</p>
+          <p>An original recruitment advertisement for the Institute, featuring Old Bagley Hall (1892–1906).</p>
         </div>
       </div>
+
       <div class="doc-card">
         <div class="body">
           <span class="tag">Souvenir programme</span>
           <h4>Dedication of Lincoln Memorial Hall</h4>
           <p>Published by the Institute, printed by John Mitchell, Jr. in Richmond. May 19–21, 1912.</p>
-          <p class="rarity">Held by one library worldwide (CARLI/I-Share, Illinois) — not yet digitized.</p>
+          <p class="rarity">Held by one library worldwide (CARLI/I‑Share, Illinois) — not yet digitized.</p>
         </div>
       </div>
+
       <div class="doc-card">
-        <img src="images/roosevelt-letter.jpeg" alt="Rosa E. Smallwood's 1901 letter to Vice President Theodore Roosevelt">
+        <div class="imgwrap" data-lightbox="roosevelt"><img src="images/img018.jpg" alt="Letter to Theodore Roosevelt"></div>
         <div class="body">
           <span class="tag">Correspondence</span>
           <h4>Letter to Theodore Roosevelt</h4>
-          <p>Rosa E. Smallwood's March 18, 1901 letter to the Vice President, referencing the Institute's work.</p>
+          <p>Rosa E. Smallwood's March 18, 1901 letter to the Vice President, appealing for emergency financial help.</p>
         </div>
       </div>
+
+      <div class="doc-card">
+        <div class="imgwrap" data-lightbox="rosa"><img src="images/img019.jpg" alt="Rosa E. Banks Smallwood"></div>
+        <div class="body">
+          <span class="tag">Portrait</span>
+          <h4>Rosa E. Banks Smallwood</h4>
+          <p>The Institute's Lady President, who led the school after her husband's death in 1912.</p>
+        </div>
+      </div>
+
+      <div class="doc-card">
+        <div class="imgwrap" data-lightbox="grave"><img src="images/img020.jpg" alt="Smallwood gravestone"></div>
+        <div class="body">
+          <span class="tag">Memorial</span>
+          <h4>Dr. Smallwood's gravestone</h4>
+          <p>"Founder and President... My work is finished." Erected by friends and patrons.</p>
+          <p class="gallery-hint">3 photographs — click to browse</p>
+        </div>
+      </div>
+
+      <div class="doc-card">
+        <div class="imgwrap" data-lightbox="marker"><img src="images/img021.jpg" alt="Historical marker K-331"></div>
+        <div class="body">
+          <span class="tag">Historical marker</span>
+          <h4>Virginia DHR Marker K‑331</h4>
+          <p>Erected 2010 at the intersection of Rt. 10 &amp; Rt. 40, Colonial Trail West, Spring Grove, Va.</p>
+        </div>
+      </div>
+
+      <div class="doc-card">
+        <div class="imgwrap" data-lightbox="uniamap"><img src="images/img022.jpg" alt="UNIA map of Virginia property"></div>
+        <div class="body">
+          <span class="tag">Map</span>
+          <h4>UNIA property map, 1926</h4>
+          <p>"Showing Landing‑Place of Slaves on James River." Surveyed by W. W. LaPrade &amp; Bros.; published in <em>The Negro World</em>, July 31, 1926.</p>
+        </div>
+      </div>
+
+      <div class="doc-card">
+        <div class="imgwrap" data-lightbox="census"><img src="images/img023.jpg" alt="1900 census listing"></div>
+        <div class="body">
+          <span class="tag">Census record</span>
+          <h4>Faculty &amp; students, 1900</h4>
+          <p>U.S. Federal Census household listing for the Institute, including five teachers and more than a dozen resident students.</p>
+        </div>
+      </div>
+
+      <div class="doc-card">
+        <div class="imgwrap" data-lightbox="hampton"><img src="images/img024.jpg" alt="Hampton Institute catalogue"></div>
+        <div class="body">
+          <span class="tag">School catalogue</span>
+          <h4>Hampton Normal &amp; Agricultural Institute, 1871–72</h4>
+          <p>Lists "John Jefferson Smallwood, Rich Square, N.C." among enrolled students.</p>
+        </div>
+      </div>
+
+      <div class="doc-card">
+        <div class="imgwrap" data-lightbox="shaw"><img src="images/img025.jpg" alt="Shaw University catalogue"></div>
+        <div class="body">
+          <span class="tag">School catalogue</span>
+          <h4>Shaw University, 1874–76</h4>
+          <p>Roster listing John Jefferson Smallwood alongside classmate John H. Turner.</p>
+        </div>
+      </div>
+
+      <div class="doc-card">
+        <div class="imgwrap" data-lightbox="transcript1894"><img src="images/img026.jpg" alt="Boston Evening Transcript 1894"></div>
+        <div class="body">
+          <span class="tag">Newspaper</span>
+          <h4>"A New Colored Leader"</h4>
+          <p>Boston Evening Transcript, Boston, Mass., June 21, 1894, p. 6.</p>
+        </div>
+      </div>
+
+      <div class="doc-card">
+        <div class="multi-strip">
+          <div class="imgwrap" data-lightbox="globe1895"><img src="images/img027.jpg" alt="Boston Globe 1895 page 1"></div>
+        </div>
+        <div class="body">
+          <span class="tag">Newspaper</span>
+          <h4>"He Made Friends"</h4>
+          <p>The Boston Globe, Jan. 19, 1895, pp. 1 &amp; 4 — on Smallwood's fundraising and a dispute over an "outrage" claim.</p>
+          <p class="gallery-hint">2 pages — click to browse</p>
+        </div>
+      </div>
+
+      <div class="doc-card">
+        <div class="imgwrap" data-lightbox="nyt1912"><img src="images/img028.jpg" alt="New York Times 1912"></div>
+        <div class="body">
+          <span class="tag">Newspaper</span>
+          <h4>"Hall for Negro Institute"</h4>
+          <p>The New York Times, May 21, 1912 — on the dedication of Lincoln Memorial Hall and Mrs. John Hay's $50,000 gift.</p>
+        </div>
+      </div>
+
+      <div class="doc-card">
+        <div class="imgwrap" data-lightbox="buffalo1904"><img src="images/img029.jpg" alt="Buffalo Evening News 1904"></div>
+        <div class="body">
+          <span class="tag">Newspaper</span>
+          <h4>"Old Wharf Where the First Slave Sold in Bondage"</h4>
+          <p>Buffalo Evening News, May 28, 1904 — on the historic wharf on Institute property and its need of repair.</p>
+        </div>
+      </div>
+
+      <div class="doc-card">
+        <div class="imgwrap" data-lightbox="interviewmain"><img src="images/img030.jpg" alt="Was Born a Slave newspaper interview"></div>
+        <div class="body">
+          <span class="tag">Interview</span>
+          <h4>"Was Born a Slave" (c. 1888–90)</h4>
+          <p>Smallwood's own first-person account of his enslavement and early life. Full transcript in the Founder tab.</p>
+          <p class="gallery-hint">7 images — click to browse</p>
+        </div>
+      </div>
+
       <div class="doc-card">
         <div class="body">
           <span class="tag">Court record</span>
           <h4>1913 receivership filing</h4>
           <p>Surry County Chancery Court record placing the Institute's property under receivership.</p>
-          <p class="rarity">Receiver's identity pending confirmation.</p>
+          <p class="rarity">Not corroborated in the compiled research document — receiver's identity pending confirmation.</p>
         </div>
       </div>
+
       <div class="doc-card">
         <div class="body">
           <span class="tag">Community history</span>
           <h4>Claremont Plantation record</h4>
-          <p>Documentation of enslaved men from Claremont Plantation, tied to a Civil War-era incident at Jamestown Island.</p>
+          <p>Documentation of enslaved men from Claremont Plantation, tied to a Civil War‑era incident at Jamestown Island.</p>
         </div>
       </div>
+
       <div class="doc-card">
         <div class="body">
           <span class="tag">Local history</span>
@@ -449,11 +1109,113 @@
           <p>William Orgain Allen and the Allen family held an estimated 800–1,000 enslaved people across five counties, making them the dominant plantation holders in the region surrounding the Institute.</p>
         </div>
       </div>
+
       <div class="doc-card">
         <div class="body">
           <span class="tag">Local history</span>
           <h4>John H. Ellis, landowner</h4>
           <p>A free Black landowner in Surry County whose life and property offer context for the community the Institute was founded to serve.</p>
+        </div>
+      </div>
+
+    </div>
+
+    <details class="transcript">
+      <summary>Read the full transcription: Letter to Vice President Theodore Roosevelt (March 18, 1901)</summary>
+      <div class="transcript-body">
+        <p><strong>Claremont, Va., March 18, 1901.</strong> Hon. Theodore Roosevelt, Vice Pres. U.S.A.</p>
+        <p><em>My dear Mr. Vice President:</em></p>
+        <p>You will excuse me please, for the seeming presumption, if I dare, honored Sir, to send you this letter. I am a Negro woman at the head of the Institution named above which, as you know was founded by my faithful husband, Oct. 12/92.</p>
+        <p>The Institution itself is an interesting piece of Virginia and National history founded upon moral, industrial, and religious lines, operated by a young man with double his will, in the face of White Caps, Ku‑Klux and shot guns. My husband planted this young, industrial, Scientific and classical Institution upon the very spot where his mother was sold as a slave and where his grandfather was shot because he would not allow his overseer to whip his wife in his presence.</p>
+        <p>No living soul can imagine what we have passed through here since '92. We owe $3500. It must be paid April 1, April 15, May 15th, respectively. We write to ask you to help us meet these obligations, please.</p>
+        <p style="font-size:12.5px; color:var(--forest); font-style:italic;">The letterhead lists the school year as nine months and fifteen days, board and tuition at $6.50, and a request for $10,000 and 65,000 feet of lumber to begin the new Industrial Hall — plus a saw mill, farm implements, and a printing press.</p>
+      </div>
+    </details>
+  </section>
+
+  <!-- DEDICATION PROGRAMME -->
+  <section class="panel" id="dedication">
+    <h2 class="section-title">1912 Dedication Programme</h2>
+    <p class="section-sub">The original souvenir programme for the three-day dedication of Lincoln Memorial Hall, May 19–21, 1912 — recovered as a scanned copy after being listed by WorldCat as held by only one library worldwide. Printed by John Mitchell, Jr., Richmond, Va. Click any image to enlarge.</p>
+    <div class="doc-grid">
+      <div class="doc-card">
+        <div class="imgwrap" data-lightbox="progcover"><img src="images/img031.jpg" alt="Cover, Souvenir Programme (1912)"></div>
+        <div class="body">
+          <span class="tag">Souvenir Programme</span>
+          <h4>Cover, Souvenir Programme (1912)</h4>
+          <p>“Souvenir Programme. Dedication of Lincoln Memorial Hall.” Printed by John Mitchell, Jr., Richmond, Va. — previously believed held by only one library worldwide; a scanned copy has now been recovered.</p>
+        </div>
+      </div>
+      <div class="doc-card">
+        <div class="imgwrap" data-lightbox="proghistory"><img src="images/img032.jpg" alt="“Brief History of a Great Work”"></div>
+        <div class="body">
+          <span class="tag">Programme text</span>
+          <h4>“Brief History of a Great Work”</h4>
+          <p>The programme’s own institutional history: founding in 1892, the 1894 wharf tract purchase, Sawyer Hall (1894–95), the Bagley Hall rebuild (1906–07), and the construction of Lincoln Memorial Hall (1910–11), funded largely by Mrs. Clara S. Hay.</p>
+        </div>
+      </div>
+      <div class="doc-card">
+        <div class="imgwrap" data-lightbox="progsun1"><img src="images/img033.jpg" alt="Programme, Sunday May 19th"></div>
+        <div class="body">
+          <span class="tag">Programme text</span>
+          <h4>Programme, Sunday May 19th</h4>
+          <p>Consecration service and General Service in Lincoln Hall, led by President John J. Smallwood; Baccalaureate Sermon by Rev. Charles S. Morris of Norfolk.</p>
+        </div>
+      </div>
+      <div class="doc-card">
+        <div class="imgwrap" data-lightbox="progsun2mon1"><img src="images/img034.jpg" alt="Programme, Sunday 2:30 – Monday 1:30"></div>
+        <div class="body">
+          <span class="tag">Programme text</span>
+          <h4>Programme, Sunday 2:30 – Monday 1:30</h4>
+          <p>Sunday afternoon and evening sessions, then Monday’s formal dedication of Lincoln Memorial Hall, the Electric Plant, and the John Hay Wharf — with Gov. William Hodges Mann of Virginia presiding.</p>
+        </div>
+      </div>
+      <div class="doc-card">
+        <div class="imgwrap" data-lightbox="progtue"><img src="images/img035.jpg" alt="Programme, Monday evening – Tuesday"></div>
+        <div class="body">
+          <span class="tag">Programme text</span>
+          <h4>Programme, Monday evening – Tuesday</h4>
+          <p>The William’s Prize oratorical contest, the Farmers’ Congress, and Commencement Exercises for the Class of 1912 (valedictorian James E. Brown, salutatorian Charles Sumner Wilkinson).</p>
+        </div>
+      </div>
+      <div class="doc-card">
+        <div class="imgwrap" data-lightbox="proglincoln"><img src="images/img036.jpg" alt="Lincoln Hall, dedication exercises"></div>
+        <div class="body">
+          <span class="tag">Photograph</span>
+          <h4>Lincoln Hall, dedication exercises</h4>
+          <p>“Lincoln Hall, 133½ by 49½ feet, 4 story, built of brick, cement and stone … at a cost of $45,987. This Hall, to the honor of the Great Emancipator, is built near the very spot where the Second Cargo of Slaves landed May 24, 1624.”</p>
+        </div>
+      </div>
+      <div class="doc-card">
+        <div class="imgwrap" data-lightbox="progbagleyorig"><img src="images/img037.jpg" alt="“Bagley Hall” (before rebuilding)"></div>
+        <div class="body">
+          <span class="tag">Illustration</span>
+          <h4>“Bagley Hall” (before rebuilding)</h4>
+          <p>“First built in 1622–1649–1729 and 1808 and used as a Slave Barrack from 1624–1865, bought by President Smallwood in 1892, rebuilt by Dr. Smallwood 1907–08, at a cost of $10,000.00.”</p>
+        </div>
+      </div>
+      <div class="doc-card">
+        <div class="imgwrap" data-lightbox="progbagleyrebuilt"><img src="images/img038.jpg" alt="Rebuilt “Old Bagley Hall”"></div>
+        <div class="body">
+          <span class="tag">Photograph</span>
+          <h4>Rebuilt “Old Bagley Hall”</h4>
+          <p>The rebuilt Bagley Hall fronting the campus, with Wharf Road and President Smallwood visible in the distance.</p>
+        </div>
+      </div>
+      <div class="doc-card">
+        <div class="imgwrap" data-lightbox="progmayflower"><img src="images/img039.jpg" alt="D. Wilson Moore, Barn, “Mayflower” Cottage"></div>
+        <div class="body">
+          <span class="tag">Photograph</span>
+          <h4>D. Wilson Moore, Barn, “Mayflower” Cottage</h4>
+          <p>The barn stable, the Mayflower Cottage, and the cabbage field — named for D. Wilson Moore, credited in the programme as a major benefactor who helped pay off the Institute’s land in 1900–01.</p>
+        </div>
+      </div>
+      <div class="doc-card">
+        <div class="imgwrap" data-lightbox="progshed"><img src="images/img040.jpg" alt="Shed and farm tools"></div>
+        <div class="body">
+          <span class="tag">Photograph</span>
+          <h4>Shed and farm tools</h4>
+          <p>“All of the valuable farm tools are kept under a shed when not in actual service” — part of the programme’s documentation of the Institute’s working farm.</p>
         </div>
       </div>
     </div>
@@ -464,7 +1226,7 @@
     <h2 class="section-title">Community submissions</h2>
     <p class="section-sub">Share a family story, photograph, or record. Submissions are reviewed before publication.</p>
     <div class="form-embed" style="padding: 40px 30px; text-align: center;">
-      <p style="font-family: 'Old Standard TT', serif; font-size: 18px; margin-bottom: 10px;">Ready to share a story or document?</p>
+      <p style="font-family: 'Old Standard TT', serif; font-size: 18px; margin-bottom: 10px; color:var(--forest-deep);">Ready to share a story or document?</p>
       <p style="font-size: 14px; color: var(--forest); margin-bottom: 20px;">This form accepts photo and document uploads, so it opens in its own tab.</p>
       <a href="https://forms.gle/rfUjkXqujSZs7YZW7" target="_blank" rel="noopener" class="submit-btn" style="text-decoration:none; display:inline-block;">Open the submission form ↗</a>
     </div>
@@ -487,7 +1249,7 @@
         <div class="badge">Most supportive · Tier II</div>
         <h4>Steward</h4>
         <div class="price">$15/mo</div>
-        <p>Everything in Friend, plus behind-the-scenes documentary footage.</p>
+        <p>Everything in Friend, plus behind‑the‑scenes documentary footage.</p>
         <a href="#">Join ↗</a>
       </div>
       <div class="tier">
@@ -500,6 +1262,65 @@
     </div>
   </section>
 
+  <!-- SOURCES -->
+  <section class="panel" id="sources">
+    <h2 class="section-title">Sources &amp; editorial notes</h2>
+    <p class="section-sub">This archive combines an earlier community‑maintained record with a more recent, independently corroborated research compilation. Where the two conflicted, the better‑corroborated, more recent facts were used.</p>
+
+    <h3 class="sub-title">Editorial note on corrections</h3>
+    <p class="body-text">This record combines material from Benjamin Swenson's 2004 M.A. thesis with more recent, independently corroborated research (the VCU Libraries Social Welfare History Project, the Surry County Historical Society, Virginia DHR Marker K‑331, and Wikipedia). Where the two sets of sources conflicted, the better‑corroborated facts were used and the thesis's figures were superseded. Notable corrections include: the year of Dr. Smallwood's death (1912, not 1910, as confirmed by his death certificate, contemporary newspaper coverage, and the official historical marker); the school's eventual closure (the original Smallwood‑founded institution continued under new leadership and new names through the 1920s, ultimately becoming Universal Liberty University under the UNIA before folding in 1929 and the campus being sold and demolished in 1937–1941, rather than closing simply in 1928 following the 1921 Corey merger); and the framing of Smallwood's descent from Nat Turner, which multiple independent sources state more directly than the thesis's framing as merely "claimed." Two details drawn from family‑history materials — the account of a young Smallwood intervening on Marcus W. Smallwood's behalf during a Civil War‑era confrontation, and certain round‑number statistics regarding lecture mileage and total donations — rest on family tradition and have not been independently verified.</p>
+
+    <h3 class="sub-title">Primary and secondary sources</h3>
+    <ul class="source-list">
+      <li>Swenson, Benjamin Andrew. "Postbellum Education of African Americans…" M.A. Thesis, College of William and Mary, 2004.</li>
+      <li>Randall, James I. "John J. Smallwood and the Temperance, Industrial and Collegiate Institute." VCU Libraries Social Welfare History Project, October 10, 2022.</li>
+      <li>"The Remarkable Dr. Smallwood's School," Surry County, VA Historical Society.</li>
+      <li>Virginia Department of Historical Resources, Historical Marker K‑331, erected 2010, Spring Grove, Surry County, VA.</li>
+      <li>"Claremont, Virginia," Wikipedia.</li>
+      <li>Drew, Mary E. C. <em>Divine Will, Restless Heart: The Life and Works of Dr. John Jefferson Smallwood, 1863–1912.</em> Xlibris Corporation, 2010.</li>
+      <li>"Pastor Weds As Death Nears: U.N.I.A. Buys Smallwood‑Corey Institute," Norfolk Journal &amp; Guide, July 31, 1926, p. 1.</li>
+      <li>"Let's Put It Over: A University On The James River," The Negro World, July 31, 1926, p. 3.</li>
+      <li>Brown, C. M. "Crowd Goes To Claremont On U.N.I.A. Trip," Norfolk Journal &amp; Guide, September 18, 1926; "U.N.I.A. Members Attend Finals At Claremont School," Norfolk Journal &amp; Guide, June 4, 1927.</li>
+      <li>"Notice," The Negro World, October 12, 1929, p. 2.</li>
+      <li>Hill, R. A., &amp; Blair, B. <em>The Marcus Garvey and Universal Negro Improvement Association Papers</em>, Vol. VI: September 1924–December 1927, UCLA African Studies Center.</li>
+      <li>"Circular of Information of the Temperance, Industrial and Collegiate Institute," Smallwood student file, Hampton University Archives.</li>
+      <li>Ellis, Emmet. "History of the Institute," Smallwood student file, Hampton University Archives.</li>
+      <li>Gregory, Eve S. <em>Claremont Manor: A History</em> (Petersburg, VA: Plummer Printing Company, 1999), pp. 99–101.</li>
+      <li>Advertisement, Richmond Times‑Dispatch, Educational Section, 1906.</li>
+      <li><em>The Monthly Advocate</em>, Temperance Industrial and Collegiate Institute school newspaper.</li>
+      <li>Town of Claremont, Virginia, history of incorporation (1886) and the Claremont Colony development by Joseph Franklin Mancha, 1879–1882.</li>
+      <li>"Dr. John Jefferson Smallwood (1863–1912)," FamilySearch Family Tree, including listed children Thelma Evelyn Smallwood (1901–1948) and John J. Smallwood Jr. (1906–1907).</li>
+      <li>"Was Born A Slave: Former Owner Still Claimed Him After War," newspaper interview with J. J. Smallwood, c. 1888–1890 (likely The Boston Globe); user‑submitted scan.</li>
+      <li>"Map of Virginia Property Acquired by U.N.I.A., Showing Landing‑Place of Slaves on James River," The Negro World, July 31, 1926, p. 3; surveyed by W. W. LaPrade &amp; Bros., June 28, 1926.</li>
+    </ul>
+
+    <h3 class="sub-title">Open research leads</h3>
+    <p class="body-text">The generator's manufacturer, capacity, and the date Claremont switched to commercial utility service remain undocumented; likely sources include VEPCO and Virginia State Corporation Commission records. No photograph of the powerhouse has surfaced, and a later campus expansion to roughly 300 acres mentioned in some sources is not corroborated elsewhere here. The identity of the 1913 receiver and the disputed January 1913 charter reorganization also remain unresolved.</p>
+
+    <h3 class="sub-title">Contact &amp; research team</h3>
+    <div class="contact-grid">
+      <div><strong>Communications</strong>Cory Howell, Legacy Ambassador</div>
+      <div><strong>Public relations</strong>Antonio D. Charity, Legacy Ambassador</div>
+      <div><strong>Email</strong>smallwood.edu.surry@gmail.com</div>
+      <div><strong>Phone</strong>757‑356‑2574</div>
+    </div>
+    <p class="note-box">The contact details above are current points of contact related to this research and are not part of the historical record of the Institute, which traces its final closure to 1929.</p>
+  </section>
+
+</div>
+
+<footer class="site-footer">TEMPERANCE INDUSTRIAL &amp; COLLEGIATE INSTITUTE · LIVING ARCHIVE · CLAREMONT, VIRGINIA</footer>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox">
+  <button class="lb-close" id="lb-close" aria-label="Close">&times;</button>
+  <button class="lb-nav lb-prev" id="lb-prev" aria-label="Previous">&#8249;</button>
+  <div class="lb-count" id="lb-count"></div>
+  <figure>
+    <img id="lb-img" src="" alt="">
+    <figcaption id="lb-caption"></figcaption>
+  </figure>
+  <button class="lb-nav lb-next" id="lb-next" aria-label="Next">&#8250;</button>
 </div>
 
 <script>
@@ -511,9 +1332,110 @@
       panels.forEach(p => p.classList.remove('active'));
       btn.classList.add('active');
       document.getElementById(btn.dataset.panel).classList.add('active');
+      window.scrollTo({top:0, behavior:'instant'});
     });
   });
 
+  // ---- Lightbox galleries ----
+  const galleries = {
+    home1: [{src:"images/img041.jpg", cap:"Lincoln Memorial Hall, dedicated 1912"}],
+    home2: [{src:"images/img042.jpg", cap:"Dr. John J. Smallwood"}],
+    home3: [{src:"images/img043.jpg", cap:"Institute recruitment advertisement, featuring Old Bagley Hall (1892–1906)"}],
+    home4: [{src:"images/img044.jpg", cap:"Virginia DHR Historical Marker K-331, erected 2010"}],
+    'founder-portrait': [{src:"images/img045.jpg", cap:"John J. Smallwood, founder of the Temperance Industrial and Collegiate Institute"}],
+    portrait: [{src:"images/img046.jpg", cap:"Dr. John J. Smallwood"}],
+    lincoln: [{src:"images/img047.jpg", cap:"Lincoln Memorial Hall, dedicated 1912"}],
+    bagley: [{src:"images/img048.jpg", cap:"Bagley Hall, overlooking the James River"}],
+    broadside: [{src:"images/img049.jpg", cap:"\"For the Welfare of the Negro Youth\" — Institute advertisement featuring Old Bagley Hall, 1892–1906"}],
+    roosevelt: [{src:"images/img050.jpg", cap:"Rosa E. Smallwood's letter to Vice President Theodore Roosevelt, March 18, 1901"}],
+    rosa: [{src:"images/img051.jpg", cap:"Rosa E. Banks Smallwood, the Institute's Lady President"}],
+    grave: [
+      {src:"images/img052.jpg", cap:"\"Founder and President of the Temperance, Industrial and Collegiate Institute... My work is finished.\""},
+      {src:"images/img053.jpg", cap:"\"Scholar · Educator · Friend — His greatest monument is the institution for learning and culture he founded.\" Erected by friends and patrons."},
+      {src:"images/img054.jpg", cap:"The Smallwood memorial monument, later relocated to Abundant Life Christian Church, Spring Grove, Va."}
+    ],
+    marker: [{src:"images/img055.jpg", cap:"Virginia DHR Historical Marker K-331, Spring Grove, Surry County, Va., erected 2010"}],
+    uniamap: [{src:"images/img056.jpg", cap:"\"Map of Virginia Property Acquired by U.N.I.A., Showing Landing-Place of Slaves on James River,\" The Negro World, July 31, 1926"}],
+    census: [{src:"images/img057.jpg", cap:"Temperance Industrial Collegiate Institute, Faculty and Students — 1900 U.S. Federal Census"}],
+    hampton: [
+      {src:"images/img058.jpg", cap:"Catalogue of the Hampton Normal and Agricultural Institute, 1871–72"},
+      {src:"images/img059.jpg", cap:"Catalogue page listing \"Jeremiah C. Simpson... John Jefferson Smallwood, Rich Square, N.C.\""}
+    ],
+    shaw: [
+      {src:"images/img060.jpg", cap:"Catalogue of Shaw University, Raleigh, North Carolina, 1874–75"},
+      {src:"images/img061.jpg", cap:"Shaw University roster, 1875–76, listing John Jefferson Smallwood"}
+    ],
+    transcript1894: [{src:"images/img062.jpg", cap:"\"A New Colored Leader\" — Boston Evening Transcript, June 21, 1894, p. 6"}],
+    globe1895: [
+      {src:"images/img063.jpg", cap:"\"He Made Friends\" — The Boston Globe, January 19, 1895, p. 1"},
+      {src:"images/img064.jpg", cap:"\"He Made Friends,\" continued — The Boston Globe, January 19, 1895, p. 4"}
+    ],
+    nyt1912: [{src:"images/img065.jpg", cap:"\"Hall for Negro Institute\" — The New York Times, May 21, 1912, p. 14"}],
+    buffalo1904: [{src:"images/img066.jpg", cap:"\"Old Wharf Where the First Slave Sold in Bondage\" — Buffalo Evening News, May 28, 1904, p. 26"}],
+    interviewmain: [
+      {src:"images/img067.jpg", cap:"\"Was Born a Slave\" — newspaper clipping, c. 1888–1890"},
+      {src:"images/img068.jpg", cap:"Mr. John Jefferson Smallwood (newspaper sketch portrait)"},
+      {src:"images/img069.jpg", cap:"Full clipping, original columns (1 of 6)"},
+      {src:"images/img070.jpg", cap:"Full clipping, original columns (2 of 6)"},
+      {src:"images/img071.jpg", cap:"Full clipping, original columns (3 of 6)"},
+      {src:"images/img072.jpg", cap:"Full clipping, original columns (4 of 6)"},
+      {src:"images/img073.jpg", cap:"Full clipping, original columns (5 of 6)"},
+      {src:"images/img074.jpg", cap:"Full clipping, original columns (6 of 6)"}
+    ],
+    interview1: [{src:"images/img075.jpg", cap:"\"Was Born a Slave\" — headline"}],
+    interview2: [{src:"images/img076.jpg", cap:"Full clipping, columns 1–2"}, {src:"images/img077.jpg", cap:"Full clipping, columns 1–2 (cont.)"}],
+    interview3: [{src:"images/img078.jpg", cap:"Full clipping, columns 3–4"}, {src:"images/img079.jpg", cap:"Full clipping, columns 3–4 (cont.)"}],
+    interview4: [{src:"images/img080.jpg", cap:"Full clipping, columns 5–6"}, {src:"images/img081.jpg", cap:"Full clipping, columns 5–6 (cont.)"}]
+    progcover: [{src:"images/img082.jpg", cap:"Souvenir Programme cover, Dedication of Lincoln Memorial Hall, 1912"}],
+    proghistory: [{src:"images/img083.jpg", cap:"\u201cBrief History of a Great Work,\u201d from the 1912 souvenir programme"}],
+    progsun1: [{src:"images/img084.jpg", cap:"Programme, Sunday May 19th, 1912"}],
+    progsun2mon1: [{src:"images/img085.jpg", cap:"Programme continued, Sunday 2:30 P.M. \u2013 Monday 20th, 1:30 P.M."}],
+    progtue: [{src:"images/img086.jpg", cap:"Programme continued, Monday evening \u2013 Tuesday, May 21st, 1912"}],
+    proglincoln: [{src:"images/img087.jpg", cap:"Lincoln Hall, dedication exercises, May 1912"}],
+    progbagleyorig: [{src:"images/img088.jpg", cap:"\u201cBagley Hall\u201d before its 1907-08 rebuilding"}],
+    progbagleyrebuilt: [{src:"images/img089.jpg", cap:"Rebuilt \u201cOld Bagley Hall\u201d fronting the campus"}],
+    progmayflower: [{src:"images/img090.jpg", cap:"D. Wilson Moore, barn stable, the \u201cMayflower\u201d cottage, and the cabbage field"}],
+    progshed: [{src:"images/img091.jpg", cap:"Shed and farm tools on the Institute grounds"}],
+  };
+
+  const lb = document.getElementById('lightbox');
+  const lbImg = document.getElementById('lb-img');
+  const lbCap = document.getElementById('lb-caption');
+  const lbCount = document.getElementById('lb-count');
+  let currentGallery = [];
+  let currentIndex = 0;
+
+  function openLightbox(key){
+    currentGallery = galleries[key] || [];
+    if(!currentGallery.length) return;
+    currentIndex = 0;
+    renderLightbox();
+    lb.classList.add('open');
+  }
+  function renderLightbox(){
+    const item = currentGallery[currentIndex];
+    lbImg.src = item.src;
+    lbImg.alt = item.cap;
+    lbCap.textContent = item.cap;
+    lbCount.textContent = currentGallery.length > 1 ? (currentIndex+1) + ' / ' + currentGallery.length : '';
+    document.getElementById('lb-prev').style.display = currentGallery.length > 1 ? 'flex' : 'none';
+    document.getElementById('lb-next').style.display = currentGallery.length > 1 ? 'flex' : 'none';
+  }
+  function closeLightbox(){ lb.classList.remove('open'); }
+
+  document.querySelectorAll('[data-lightbox]').forEach(el => {
+    el.addEventListener('click', () => openLightbox(el.dataset.lightbox));
+  });
+  document.getElementById('lb-close').addEventListener('click', closeLightbox);
+  document.getElementById('lb-prev').addEventListener('click', () => { currentIndex = (currentIndex - 1 + currentGallery.length) % currentGallery.length; renderLightbox(); });
+  document.getElementById('lb-next').addEventListener('click', () => { currentIndex = (currentIndex + 1) % currentGallery.length; renderLightbox(); });
+  lb.addEventListener('click', (e) => { if(e.target === lb) closeLightbox(); });
+  document.addEventListener('keydown', (e) => {
+    if(!lb.classList.contains('open')) return;
+    if(e.key === 'Escape') closeLightbox();
+    if(e.key === 'ArrowLeft') { currentIndex = (currentIndex - 1 + currentGallery.length) % currentGallery.length; renderLightbox(); }
+    if(e.key === 'ArrowRight') { currentIndex = (currentIndex + 1) % currentGallery.length; renderLightbox(); }
+  });
 </script>
 
 </body>
