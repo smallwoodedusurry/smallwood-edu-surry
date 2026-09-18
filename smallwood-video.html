@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Founded on Sacred Ground — The Smallwood Institute</title>
+<style>
+  :root{
+    --paper: #ede6d3;
+    --paper-dark: #d9cfb2;
+    --ink: #241d13;
+    --ink-soft: #4a3f2b;
+    --brass: #8a6a3c;
+    --rust: #7a3324;
+    --line: rgba(36,29,19,0.25);
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --paper: #1b1712;
+      --paper-dark: #12100c;
+      --ink: #ece3cf;
+      --ink-soft: #c9bd9e;
+      --brass: #c9a15e;
+      --rust: #d3745a;
+      --line: rgba(236,227,207,0.25);
+    }
+  }
+  :root[data-theme="dark"]{
+    --paper: #1b1712;
+    --paper-dark: #12100c;
+    --ink: #ece3cf;
+    --ink-soft: #c9bd9e;
+    --brass: #c9a15e;
+    --rust: #d3745a;
+    --line: rgba(236,227,207,0.25);
+  }
+
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0; padding: 0; height: 100%;
+    background: var(--paper-dark);
+    color: var(--ink);
+    font-family: Georgia, 'Iowan Old Style', 'Palatino Linotype', serif;
+    overflow: hidden;
+  }
+
+  .stage {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    max-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background:
+      radial-gradient(ellipse at 50% 0%, rgba(138,106,60,0.12), transparent 60%),
+      var(--paper);
+  }
+
+  .frame {
+    position: relative;
+    width: min(94vw, 560px);
+    height: min(88vh, 760px);
+    background: var(--paper);
+    border: 1px solid var(--line);
+    box-shadow: 0 30px 80px rgba(0,0,0,0.35);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .frame::before{
+    content: "";
+    position: absolute;
+    inset: 14px;
+    border: 1px solid var(--line);
+    pointer-events: none;
+    z-index: 3;
+  }
+
+  .slides {
+    position: relative;
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 56px 44px;
+  }
+
+  .slide {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 56px 44px;
+    opacity: 0;
+    transform: translateY(14px) scale(0.99);
+    transition: opacity 900ms ease, transform 900ms ease;
+    pointer-events: none;
+  }
+  .slide.active {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    pointer-events: auto;
+  }
+
+  .kicker {
+    font-family: 'Trebuchet MS', 'Century Gothic', sans-serif;
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    color: var(--brass);
+    margin-bottom: 18px;
+  }
+
+  .headline {
+    font-size: clamp(22px, 5.4vw, 32px);
+    line-height: 1.28;
+    color: var(--ink);
+    margin: 0 0 14px 0;
+    font-weight: 400;
+  }
+  .headline em {
+    font-style: italic;
+    color: var(--rust);
+  }
+
+  .sub {
+    font-family: 'Trebuchet MS', 'Century Gothic', sans-serif;
+    font-size: 13.5px;
+    color: var(--ink-soft);
+    line-height: 1.6;
+    max-width: 38ch;
+  }
+
+  .yearmark {
+    font-family: 'Trebuchet MS', 'Century Gothic', sans-serif;
+    font-size: 46px;
+    letter-spacing: 0.02em;
+    color: var(--brass);
+    margin-bottom: 10px;
+    font-weight: 700;
+  }
+
+  .ornament {
+    width: 46px;
+    height: 1px;
+    background: var(--line);
+    margin: 20px 0;
+  }
+
+  .caption-bar {
+    position: relative;
+    z-index: 4;
+    padding: 16px 28px 20px;
+    border-top: 1px solid var(--line);
+    background: var(--paper);
+    min-height: 58px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .caption-text {
+    font-family: 'Trebuchet MS', 'Century Gothic', sans-serif;
+    font-size: 12.5px;
+    color: var(--ink-soft);
+    text-align: center;
+    line-height: 1.5;
+    max-width: 46ch;
+  }
+
+  .progress-track {
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: transparent;
+    z-index: 5;
+    display: flex;
+    gap: 3px;
+    padding: 0 14px;
+    margin-top: 14px;
+  }
+  .progress-seg {
+    flex: 1;
+    height: 3px;
+    background: var(--line);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+  .progress-seg > i {
+    display: block;
+    height: 100%;
+    width: 0%;
+    background: var(--brass);
+    transition: width 120ms linear;
+  }
+  .progress-seg.done > i { width: 100%; }
+
+  .controls {
+    position: absolute;
+    bottom: 78px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 6;
+    display: flex;
+    gap: 14px;
+    align-items: center;
+  }
+
+  .play-btn {
+    width: 54px; height: 54px;
+    border-radius: 50%;
+    border: 1px solid var(--line);
+    background: var(--ink);
+    color: var(--paper);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 18px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    transition: transform 150ms ease;
+  }
+  .play-btn:hover { transform: scale(1.06); }
+  .play-btn:active { transform: scale(0.96); }
+
+  .replay-btn {
+    font-family: 'Trebuchet MS', 'Century Gothic', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    color: var(--ink-soft);
+    background: transparent;
+    border: 1px solid var(--line);
+    padding: 8px 14px;
+    border-radius: 20px;
+    cursor: pointer;
+    display: none;
+  }
+  .replay-btn.show { display: inline-block; }
+
+  .titlecard {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: 8px;
+  }
+  .titlecard .eyebrow {
+    font-family: 'Trebuchet MS', 'Century Gothic', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    color: var(--brass);
+  }
+  .titlecard h1 {
+    font-size: clamp(26px, 6.4vw, 38px);
+    font-weight: 400;
+    line-height: 1.2;
+    margin: 10px 0 6px;
+  }
+  .titlecard .place {
+    font-family: 'Trebuchet MS', 'Century Gothic', sans-serif;
+    font-size: 13px;
+    color: var(--ink-soft);
+    letter-spacing: 0.04em;
+  }
+  .tap-hint {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: 'Trebuchet MS', 'Century Gothic', sans-serif;
+    font-size: 11px;
+    color: var(--ink-soft);
+    opacity: 0.75;
+    z-index: 6;
+  }
+  .unsupported {
+    position: absolute;
+    inset: 0;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 40px;
+    font-family: 'Trebuchet MS', 'Century Gothic', sans-serif;
+    font-size: 13px;
+    color: var(--ink-soft);
+    background: var(--paper);
+    z-index: 10;
+  }
+</style>
+</head>
+<body>
+
+<div class="stage">
+  <div class="frame">
+
+    <div class="progress-track" id="progressTrack"></div>
+
+    <div class="slides" id="slides">
+
+      <div class="slide active" data-idx="0">
+        <div class="titlecard">
+          <div class="eyebrow">A LIVING ARCHIVE</div>
+          <h1>Founded on<br><em>Sacred Ground</em></h1>
+          <div class="ornament"></div>
+          <div class="place">Claremont, Surry, Virginia</div>
+        </div>
+      </div>
+
+      <div class="slide" data-idx="1">
+        <div class="yearmark">May 5, 1607</div>
+        <p class="headline">This same bend of the James River is where the <em>first English colonists</em> came ashore — eight days before they founded Jamestown.</p>
+        <div class="ornament"></div>
+        <p class="sub">A paradox the ground itself would carry forward.</p>
+      </div>
+
+      <div class="slide" data-idx="2">
+        <div class="yearmark">1621 – 1624</div>
+        <p class="headline">This ground saw the first recorded sale of a person of <em>African descent</em> in English North America, on June 12, 1621 — and, in 1624, the second ship carrying enslaved people of African descent ever to land in English North America.</p>
+      </div>
+
+      <div class="slide" data-idx="3">
+        <p class="headline">And yes — this all took place in the town of <em>Claremont</em>, located in Historic Surry, Virginia.</p>
+      </div>
+
+      <div class="slide" data-idx="4">
+        <div class="yearmark">1892</div>
+        <p class="headline">On that same paradoxical ground, two and a half centuries later, a <em>formerly enslaved man</em> bought the land and built a school.</p>
+      </div>
+
+      <div class="slide" data-idx="5">
+        <div class="kicker">BORN ENSLAVED, 1863</div>
+        <p class="headline">John Jefferson Smallwood was five months old when he was sold away from his parents in Southampton County, Virginia — to a 600-acre plantation in Rich Square, North Carolina.</p>
+        <div class="ornament"></div>
+        <p class="sub">He never saw his father again, and did not find his mother until decades later, in El Paso, Texas.</p>
+      </div>
+
+      <div class="slide" data-idx="6">
+        <div class="kicker">A LINEAGE, BY FAMILY TRADITION</div>
+        <p class="headline">Family history holds that his mother was the daughter of <em>Nat Turner</em>, who led the 1831 rebellion in Southampton County — making Smallwood his grandson.</p>
+        <div class="ornament"></div>
+        <p class="sub">Not independently confirmed in the historical record, but carried down through generations of the family.</p>
+      </div>
+
+      <div class="slide" data-idx="7">
+        <div class="kicker">A SPELLING BOOK, AND HAMPTON</div>
+        <p class="headline">He spent one year at Hampton Normal and Agricultural Institute — now <em>Hampton University</em> — where he was given a single Webster's spelling book.</p>
+        <div class="ornament"></div>
+        <p class="sub">From it, he taught himself to read — and, at nearly 21, walked 125 miles to freedom.</p>
+      </div>
+
+      <div class="slide" data-idx="8">
+        <div class="kicker">THE ORATOR</div>
+        <p class="headline">By his twenties, Smallwood was lecturing across New England, and all over Europe, on temperance, labor, and the treatment of Black Americans — his style compared by the press to <em>Frederick Douglass.</em></p>
+      </div>
+
+      <div class="slide" data-idx="9">
+        <div class="kicker">AN ACQUAINTANCE OF DOUGLASS</div>
+        <p class="headline">The two were acquainted — and an official letter survives inviting <em>Frederick Douglass</em> to speak at one of the Institute's graduations.</p>
+        <div class="ornament"></div>
+        <p class="sub">No proof exists that he ever accepted.</p>
+      </div>
+
+      <div class="slide" data-idx="10">
+        <div class="kicker">LESS THAN $50</div>
+        <p class="headline">In 1892, with fewer than ten pupils, he opened the <em>Temperance Industrial and Collegiate Institute</em> — classes held in a dining hall.</p>
+      </div>
+
+      <div class="slide" data-idx="11">
+        <div class="kicker">A PARTNERSHIP</div>
+        <p class="headline">In 1900 he married Rosa E. Banks, who became the Institute's Lady President — and in 1901 wrote directly to Vice President Theodore Roosevelt, soliciting financial assistance with $3,500 in debt.</p>
+        <div class="ornament"></div>
+        <p class="sub">The equivalent of roughly $144,000 today.</p>
+      </div>
+
+      <div class="slide" data-idx="12">
+        <div class="kicker">AN UNUSUAL MODEL</div>
+        <p class="headline">The school blended a classical <em>collegiate</em> curriculum — literature, political economy — with hands-on industrial and agricultural training, unlike most schools of its kind.</p>
+      </div>
+
+      <div class="slide" data-idx="13">
+        <div class="kicker">AN HBCU'S LEGACY</div>
+        <p class="headline">Over its lifetime, this historically Black college graduated between <em>two and three thousand</em> students.</p>
+      </div>
+
+      <div class="slide" data-idx="14">
+        <div class="kicker">A SELF-SUFFICIENT CAMPUS</div>
+        <p class="headline">By 1912 the grounds held fourteen buildings, a working farm, a sawmill, a printing press, and a mattress and furniture-making operation — with running water, a working sanitation system, and a fully electrified campus, meter boxes included.</p>
+        <div class="ornament"></div>
+        <p class="sub">The same power plant lit the streets of Claremont beyond the campus gates.</p>
+      </div>
+
+      <div class="slide" data-idx="15">
+        <div class="kicker">BUILT ON DONORS</div>
+        <p class="headline">With no public funding, Smallwood raised every dollar himself — from supporters including Susan B. Anthony and Clara Hay, wife of Secretary of State John Hay.</p>
+      </div>
+
+      <div class="slide" data-idx="16">
+        <div class="yearmark">MAY 1912</div>
+        <p class="headline">A three-day dedication, presided over by Virginia's governor, opened <em>Lincoln Memorial Hall</em> — a four-story brick landmark costing nearly $46,000.</p>
+        <div class="ornament"></div>
+        <p class="sub">The equivalent of roughly $1.9 million today.</p>
+      </div>
+
+      <div class="slide" data-idx="17">
+        <div class="yearmark">1912</div>
+        <p class="headline">Four months later, Smallwood was gone — age 49.</p>
+        <div class="ornament"></div>
+        <p class="sub">"I have ruined my health and my life trying to complete this work."</p>
+      </div>
+
+      <div class="slide" data-idx="18">
+        <div class="kicker">DEBT AND REINVENTION</div>
+        <p class="headline">Rosa carried the school forward, but chronic debt forced reorganization — first as <em>Smallwood-Corey Institute</em>, then, in 1926, sold to Marcus Garvey's UNIA.</p>
+        <div class="ornament"></div>
+        <p class="sub">Without Dr. Smallwood's dominant leadership and presence, it became difficult to raise money from donors.</p>
+      </div>
+
+      <div class="slide" data-idx="19">
+        <div class="kicker">UNIVERSAL LIBERTY UNIVERSITY</div>
+        <p class="headline">Garvey's movement renamed Lincoln Hall to Garvey Hall — but his imprisonment and the 1929 crash meant the school never reopened.</p>
+        <div class="ornament"></div>
+        <p class="sub">The last buildings were demolished by dynamite in 1941.</p>
+      </div>
+
+      <div class="slide" data-idx="20">
+        <div class="kicker">WHAT REMAINS</div>
+        <p class="headline">Only one official marker still exists — a <em>State road marker</em> at the corner of State Route 40 and Route 10 — along with a twenty-foot memorial statue at a church cemetery in Cabin Point, Virginia.</p>
+      </div>
+
+      <div class="slide" data-idx="21">
+        <div class="titlecard">
+          <div class="eyebrow">TODAY</div>
+          <h1>A marker stands.<br>The archive<br>keeps the story <em>alive.</em></h1>
+          <div class="place">A cultural center is planned to carry its name forward — with a documentary soon to begin filming there.</div>
+        </div>
+      </div>
+
+      <div class="slide" data-idx="22">
+        <div class="titlecard">
+          <div class="ornament"></div>
+          <p class="sub" style="max-width: 44ch; font-size: 14px;">And that is a brief factual &amp; historical dialogue about the remarkable Dr. John Jefferson Smallwood and his vision of the Temperance Industrial &amp; Collegiate Institute.</p>
+        </div>
+      </div>
+
+      <div class="slide" data-idx="23">
+        <div class="titlecard">
+          <p class="sub" style="max-width: 40ch; font-size: 13.5px;">If you'd like to hear more detailed information, or become a partner by making a monetary donation, please visit us at</p>
+          <div class="ornament"></div>
+          <div class="place" style="font-size: 15px; letter-spacing: 0.06em;">www.smallwoodinstitute.org</div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="caption-bar">
+      <div class="caption-text" id="captionText">Tap play to begin the narration.</div>
+    </div>
+
+    <button class="play-btn" id="playBtn" aria-label="Play narration">▶</button>
+    <div class="unsupported" id="unsupported">
+      Your browser doesn't support spoken narration.<br>Read the captions below each scene instead.
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  var slidesData = [
+    { text: "Founded on Sacred Ground. Claremont, Surry, Virginia.", caption: "A living archive of the Temperance Industrial and Collegiate Institute." },
+    { text: "This same bend of the James River is where the first English colonists came ashore, on May 5, 1607, eight days before they founded Jamestown.", caption: "A local historical marker commemorates this landing at Claremont, before Jamestown." },
+    { text: "This ground saw the first recorded sale of a person of African descent in English North America, on June 12, 1621, and, in sixteen twenty four, the second ship carrying enslaved people of African descent ever to land in English North America.", caption: "1621 and 1624 — layered atop the 1607 landing on the same ground." },
+    { text: "And yes, this all took place in the town of Claremont, located in Historic Surry, Virginia.", caption: "Claremont, Surry, Virginia." },
+    { text: "On that same paradoxical ground, two and a half centuries later, a formerly enslaved man bought the land and built a school.", caption: "1892 — the Institute rises on this same riverbank." },
+    { text: "John Jefferson Smallwood was five months old when he was sold away from his parents in Southampton County, Virginia, to a six hundred acre plantation in Rich Square, North Carolina. He never saw his father again, and did not find his mother until decades later, in El Paso, Texas.", caption: "Born enslaved, September 19, 1863, in Southampton County, Virginia." },
+    { text: "Family history holds that his mother was the daughter of Nat Turner, who led the eighteen thirty one rebellion in Southampton County, making Smallwood his grandson.", caption: "A family tradition, not independently confirmed in the historical record." },
+    { text: "He spent one year at Hampton Normal and Agricultural Institute, now Hampton University, where he was given a single Webster's spelling book. From it, he taught himself to read, and at nearly twenty one years old, walked one hundred twenty five miles to freedom.", caption: "Self-taught from a book given to him at Hampton; escaped near age 21." },
+    { text: "By his twenties, Smallwood was lecturing across New England, and all over Europe, on temperance, labor, and the treatment of Black Americans, his style compared by the press to Frederick Douglass.", caption: "A widely sought-after orator in New England and across Europe by the late 1880s." },
+    { text: "The two were acquainted, and an official letter survives inviting Frederick Douglass to speak at one of the Institute's graduations. No proof exists that he ever accepted.", caption: "A surviving invitation letter to Frederick Douglass." },
+    { text: "In eighteen ninety two, with fewer than ten pupils, he opened the Temperance Industrial and Collegiate Institute, classes held in a dining hall.", caption: "October 12, 1892 — less than fifty dollars in cash." },
+    { text: "In nineteen hundred he married Rosa E. Banks, who became the Institute's Lady President, and in nineteen oh one wrote directly to Vice President Theodore Roosevelt, soliciting financial assistance with thirty five hundred dollars in debt, the equivalent of roughly one hundred forty four thousand dollars today.", caption: "Rosa E. Banks Smallwood, Lady President of the Institute." },
+    { text: "The school blended a classical, collegiate curriculum, literature, political economy, with hands-on industrial and agricultural training, unlike most schools of its kind.", caption: "A hybrid model distinct from Hampton and Tuskegee's purely industrial approach." },
+    { text: "Over its lifetime, this historically Black college graduated between two and three thousand students.", caption: "An HBCU's lasting impact across nearly four decades." },
+    { text: "By nineteen twelve the grounds held fourteen buildings, a working farm, a sawmill, a printing press, and a mattress and furniture-making operation, with running water, a working sanitation system, and a fully electrified campus, meter boxes included.", caption: "A self-sufficient campus of more than sixty-five acres, with its own power plant lighting Claremont beyond the gates." },
+    { text: "With no public funding, Smallwood raised every dollar himself, from supporters including Susan B. Anthony and Clara Hay, wife of Secretary of State John Hay.", caption: "The Institute survived entirely on private donations for 36 years." },
+    { text: "A three day dedication, presided over by Virginia's governor, opened Lincoln Memorial Hall, a four story brick landmark costing nearly forty six thousand dollars, the equivalent of roughly one point nine million dollars today.", caption: "Lincoln Memorial Hall dedicated May 19 to 21, 1912." },
+    { text: "Four months later, Smallwood was gone, at age forty nine. Days earlier he had written: I have ruined my health and my life trying to complete this work.", caption: "Dr. Smallwood died September 29, 1912." },
+    { text: "Rosa carried the school forward, but chronic debt forced reorganization, first as Smallwood-Corey Institute, then, in nineteen twenty six, sold to Marcus Garvey's U.N.I.A. Without Dr. Smallwood's dominant leadership and presence, it became difficult to raise money from donors.", caption: "Renamed and refinanced through the 1920s." },
+    { text: "Garvey's movement renamed Lincoln Hall to Garvey Hall, but his imprisonment and the nineteen twenty nine crash meant the school never reopened. The last buildings were demolished by dynamite in nineteen forty one.", caption: "Universal Liberty University closed in 1929; demolished in 1941." },
+    { text: "Only one official marker still exists today, a State road marker at the corner of State Route 40 and Route 10, along with a twenty foot memorial statue at a church cemetery in Cabin Point, Virginia.", caption: "The only surviving marker, and a separate memorial statue, of the Institute." },
+    { text: "Today, a historical marker stands near the site, and a living archive keeps its story alive, alongside plans for a cultural center to carry its name forward, with a documentary soon to begin filming there.", caption: "smallwoodinstitute.org — the living archive." },
+    { text: "And that is a brief factual and historical dialogue about the remarkable Dr. John Jefferson Smallwood, and his vision of the Temperance Industrial and Collegiate Institute.", caption: "Thank you for watching." },
+    { text: "If you'd like to hear more detailed information, or become a partner by making a monetary donation, please visit us at www dot smallwood institute dot org.", caption: "www.smallwoodinstitute.org" }
+  ];
+
+  var slideEls = Array.prototype.slice.call(document.querySelectorAll('.slide'));
+  var captionEl = document.getElementById('captionText');
+  var playBtn = document.getElementById('playBtn');
+  var progressTrack = document.getElementById('progressTrack');
+  var unsupported = document.getElementById('unsupported');
+
+  slidesData.forEach(function(){
+    var seg = document.createElement('div');
+    seg.className = 'progress-seg';
+    var bar = document.createElement('i');
+    seg.appendChild(bar);
+    progressTrack.appendChild(seg);
+  });
+  var segEls = progressTrack.querySelectorAll('.progress-seg');
+
+  var supported = 'speechSynthesis' in window;
+  if (!supported) {
+    unsupported.style.display = 'flex';
+  }
+
+  var playing = false;
+  var currentIdx = -1;
+  var rafId = null;
+
+  function showSlide(i){
+    slideEls.forEach(function(s, idx){
+      s.classList.toggle('active', idx === i);
+    });
+    if (slidesData[i]) captionEl.textContent = slidesData[i].caption;
+  }
+
+  function pickVoice(){
+    var voices = window.speechSynthesis.getVoices();
+    var preferred = voices.find(function(v){ return /en-US|en_US/.test(v.lang) && /female|Samantha|Victoria|Ava/i.test(v.name); });
+    return preferred || voices.find(function(v){ return /en/.test(v.lang); }) || voices[0];
+  }
+
+  function animateSegment(segIndex, durationMs){
+    var bar = segEls[segIndex].querySelector('i');
+    var start = performance.now();
+    bar.style.width = '0%';
+    function step(now){
+      var elapsed = now - start;
+      var pct = Math.min(100, (elapsed / durationMs) * 100);
+      bar.style.width = pct + '%';
+      if (pct < 100 && playing) {
+        rafId = requestAnimationFrame(step);
+      }
+    }
+    rafId = requestAnimationFrame(step);
+  }
+
+  function markDone(segIndex){
+    segEls[segIndex].classList.add('done');
+    var bar = segEls[segIndex].querySelector('i');
+    bar.style.width = '100%';
+  }
+
+  function speakSlide(i){
+    if (i >= slidesData.length) {
+      finish();
+      return;
+    }
+    currentIdx = i;
+    showSlide(i);
+
+    if (!supported) {
+      // Fallback: timed captions without audio
+      var estMs = Math.max(2200, slidesData[i].text.split(' ').length * 340);
+      animateSegment(i, estMs);
+      setTimeout(function(){
+        markDone(i);
+        if (playing) speakSlide(i + 1);
+      }, estMs);
+      return;
+    }
+
+    var utter = new SpeechSynthesisUtterance(slidesData[i].text);
+    var v = pickVoice();
+    if (v) utter.voice = v;
+    utter.rate = 0.98;
+    utter.pitch = 1.0;
+
+    var estMs = Math.max(2000, slidesData[i].text.split(' ').length * 330);
+    animateSegment(i, estMs);
+
+    utter.onend = function(){
+      markDone(i);
+      if (playing) speakSlide(i + 1);
+    };
+    utter.onerror = function(){
+      markDone(i);
+      if (playing) speakSlide(i + 1);
+    };
+    window.speechSynthesis.speak(utter);
+  }
+
+  function finish(){
+    playing = false;
+    playBtn.textContent = '↻';
+    playBtn.setAttribute('aria-label', 'Replay narration');
+    captionEl.textContent = 'End of the story. Tap to replay.';
+  }
+
+  function resetProgress(){
+    segEls.forEach(function(seg){
+      seg.classList.remove('done');
+      seg.querySelector('i').style.width = '0%';
+    });
+  }
+
+  function start(){
+    if (supported) window.speechSynthesis.cancel();
+    if (rafId) cancelAnimationFrame(rafId);
+    resetProgress();
+    playing = true;
+    playBtn.textContent = '⏸';
+    playBtn.setAttribute('aria-label', 'Pause narration');
+    speakSlide(0);
+  }
+
+  function stop(){
+    playing = false;
+    if (supported) window.speechSynthesis.cancel();
+    if (rafId) cancelAnimationFrame(rafId);
+    playBtn.textContent = '▶';
+    playBtn.setAttribute('aria-label', 'Play narration');
+  }
+
+  playBtn.addEventListener('click', function(){
+    if (currentIdx >= slidesData.length - 1 && !playing && segEls[segEls.length-1].classList.contains('done')) {
+      // replay from scratch
+      currentIdx = -1;
+      start();
+      return;
+    }
+    if (playing) {
+      stop();
+    } else {
+      start();
+    }
+  });
+
+  if (supported && window.speechSynthesis.onvoiceschanged !== undefined) {
+    window.speechSynthesis.onvoiceschanged = function(){ /* voices loaded */ };
+  }
+
+  showSlide(0);
+})();
+</script>
+
+</body>
+</html>
