@@ -185,12 +185,25 @@
     .video-wrap {
       max-width: 620px;
       margin: 0 auto 24px;
+      padding: 12px;
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      background: rgba(255,255,255,0.18);
+      box-shadow: var(--shadow-sm);
+    }
+    .video-meta {
+      font-family: "Courier New", monospace;
+      font-size: 10px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--forest);
+      margin: 0 0 10px;
     }
     .video-wrap iframe {
       width: 100%;
       min-height: 420px;
       border: none;
-      border-radius: 24px;
+      border-radius: 16px;
       background: #eae1cf;
       display: block;
     }
@@ -199,9 +212,9 @@
       align-items: center;
       justify-content: center;
       min-height: 420px;
-      border-radius: 24px;
-      background: linear-gradient(135deg, rgba(41,66,56,0.08), rgba(140,109,63,0.08));
-      border: 1px solid var(--line);
+      border-radius: 16px;
+      border: 1px dashed rgba(41,66,56,0.35);
+      background: linear-gradient(135deg, rgba(41,66,56,0.06), rgba(140,109,63,0.08));
       color: var(--forest-deep);
       font-family: "Courier New", monospace;
       font-size: 12px;
@@ -527,10 +540,12 @@
       <p class="hero-quote">"Every record recovered is a name restored."</p>
 
       <div class="video-wrap" id="videoWrap">
+        <div class="video-meta">Archive film excerpt</div>
         <iframe
           src="videos/smallwood-video.html"
           title="Founded on Sacred Ground — Temperance Industrial and Collegiate Institute Explained"
           loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
           onerror="this.style.display='none'; this.parentElement.classList.add('has-fallback');"
         ></iframe>
         <div class="video-fallback">Video unavailable — archive content continues below.</div>
