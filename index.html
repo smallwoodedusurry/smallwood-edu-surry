@@ -242,6 +242,11 @@
       overflow: hidden;
       background: var(--paper);
       box-shadow: var(--shadow-sm);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .photo-row figure:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
     }
     .photo-row img {
       display: block;
@@ -529,10 +534,14 @@
       </div>
 
       <div class="photo-row">
-        <figure><img src="images/img001.jpg" alt="Lincoln Memorial Hall"></figure>
+        <figure><img src="images/institute-broadside.jpeg" alt="Institute broadside"></figure>
+        <figure><img src="images/lincoln-hall-1.jpeg" alt="Lincoln Hall exterior"></figure>
+        <figure><img src="images/img001.jpg" alt="Historic campus image"></figure>
         <figure><img src="images/img002.jpg" alt="Dr. John J. Smallwood"></figure>
         <figure><img src="images/img003.jpg" alt="Institute advertisement"></figure>
         <figure><img src="images/img004.jpg" alt="Historical marker"></figure>
+        <figure><img src="images/img014.jpg" alt="Historic campus archive image"></figure>
+        <figure><img src="images/img015.jpg" alt="Additional archive image"></figure>
       </div>
     </section>
 
