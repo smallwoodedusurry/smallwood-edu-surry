@@ -109,6 +109,21 @@
     font-weight: 600;
   }
   nav.tabs button:hover{ color: var(--ink); }
+  nav.tabs a.nav-link-external{
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11.5px;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    text-decoration: none;
+    background: none;
+    border: none;
+    padding: 16px 16px;
+    cursor: pointer;
+    color: var(--forest);
+    border-bottom: 3px solid transparent;
+    transition: color .15s ease, border-color .15s ease;
+  }
+  nav.tabs a.nav-link-external:hover{ color: var(--rust); border-bottom-color: var(--rust); }
 
   section.panel{ display:none; padding-top: 44px; }
   section.panel.active{ display:block; animation: fadeIn .35s ease; }
@@ -503,9 +518,10 @@
   <button class="tab-btn" data-panel="campus">Campus &amp; Curriculum</button>
   <button class="tab-btn" data-panel="archive">Archive</button>
   <button class="tab-btn" data-panel="dedication">1912 Dedication</button>
-  <button class="tab-btn" data-panel="community">Community</button>
+  <button class="tab-btn" data-panel="community">Submissions</button>
   <button class="tab-btn" data-panel="support">Donations</button>
   <button class="tab-btn" data-panel="sources">Sources</button>
+  <a class="nav-link-external" href="https://open.spotify.com/show/74NuT3Ws9pYt4w9JGAU1f8?si=dFEUnQf1S4-2y8oD4nKh1Q" target="_blank" rel="noopener">Podcast ↗</a>
 </nav>
 
 <div class="wrap">
@@ -609,7 +625,7 @@
       
 <div class="t-entry minor">
   <div class="t-year">Fall 1876</div>
-  <h4>Enrolls into Shaw University, Raliegh, NC</h4>
+  <h4>Enrolls into Shaw University, Raleigh, NC</h4>
   <p>Smallwood enrolled into Shaw University, an HBCU, with the assistance of Rev. Dr. H. M. Tupper. Excelled in his studies and joined various school organizations all while returning to the Southampton/Franklin, Va. area as well as the north east North Carolina areas during the summers to teach black people to read and write upon plantations of his birth. </p>
 </div>
       
@@ -649,10 +665,16 @@
   <p>Dr. Smallwood finds affordable land for sale referred to as "Claremont Colony". He arranges the purchase of 65¾ acres of land in Surry County, Va. on the banks of the James River, midway between Richmond and Norfolk.</p>
 </div>
 
+<div class="t-entry minor">
+  <div class="t-year">Oct. 1892</div>
+  <h4>Founded at the Old Hartwell Parker restaurant</h4>
+  <p>A separate primary source states the Institute was founded in "Old Hartwell Parker restaurant at Claremont, Va."</p>
+</div>
+
 <div class="t-entry">
   <div class="t-year">Oct. 12, 1892</div>
-  <h4>T.I.C.I. Officially opens</h4>
-  <p>The Temperance Industrial and Collegiate Institute opens with fewer than ten pupils and less than fifty dollars in cash, holding first classes in a dining hall on the property.</p>
+  <h4>T.I.C.I. Classes Officially Begins</h4>
+  <p>The Temperance Industrial and Collegiate Institute opens with fewer than ten pupils and less than fifty dollars in cash. Classes started in a dining hall on the property.</p>
 </div>
 
 <div class="t-entry minor">
@@ -1227,79 +1249,98 @@
   <!-- DEDICATION PROGRAMME -->
   <section class="panel" id="dedication">
     <h2 class="section-title">1912 Dedication Programme</h2>
-    <p class="section-sub">The original souvenir programme for the three-day dedication of Lincoln Memorial Hall, May 19–21, 1912 — recovered as a scanned copy after being listed by WorldCat as held by only one library worldwide. Printed by John Mitchell, Jr., Richmond, Va. Click any image to enlarge.</p>
+    <p class="section-sub">The complete original souvenir programme for the three-day dedication of Lincoln Memorial Hall, May 19–21, 1912 — recovered in full from the Illinois State Historical Library (accession no. 97453), whose bookplate appears on the inside covers, after being listed by WorldCat as held by only one library worldwide. Printed by John Mitchell, Jr., Richmond, Va. Click any image to enlarge; multi-page items can be paged through.</p>
+    <div class="note-box disputed"><strong>A discrepancy in the programme itself:</strong> the photo caption for Lincoln Hall states its cost as $45,987, while the "Brief History of a Great Work" page — two pages later in the same booklet — gives the hall's cost as $43,370, with the power house, electric plant, water plant, and sewerage adding $15,800–$20,000 more. Both figures are transcribed here as printed rather than silently reconciled; the $45,987 figure is the one most often cited elsewhere in this archive.</div>
     <div class="doc-grid">
       <div class="doc-card">
-        <div class="imgwrap" data-lightbox="progcover"><img src="images/img031.jpg" alt="Cover, Souvenir Programme (1912)"></div>
+        <div class="imgwrap" data-lightbox="progcover"><img src="images/dedication-cover.jpg" alt="Cover, Souvenir Programme (1912)"></div>
         <div class="body">
           <span class="tag">Souvenir Programme</span>
           <h4>Cover, Souvenir Programme (1912)</h4>
-          <p>“Souvenir Programme. Dedication of Lincoln Memorial Hall.” Printed by John Mitchell, Jr., Richmond, Va. — previously believed held by only one library worldwide; a scanned copy has now been recovered.</p>
+          <p>"Souvenir Programme. Dedication of Lincoln Memorial Hall. The Temperance, Industrial and Collegiate Institute, Claremont, Virginia. May 19th to 21st, 1912, Inclusive. John J. Smallwood, Ph. D., President and Founder." Printed by John Mitchell, Jr., 311 N. 4th St., Richmond, Va.</p>
         </div>
       </div>
       <div class="doc-card">
-        <div class="imgwrap" data-lightbox="proghistory"><img src="images/img032.jpg" alt="“Brief History of a Great Work”"></div>
-        <div class="body">
-          <span class="tag">Programme text</span>
-          <h4>“Brief History of a Great Work”</h4>
-          <p>The programme’s own institutional history: founding in 1892, the 1894 wharf tract purchase, Sawyer Hall (1894–95), the Bagley Hall rebuild (1906–07), and the construction of Lincoln Memorial Hall (1910–11), funded largely by Mrs. Clara S. Hay.</p>
-        </div>
-      </div>
-      <div class="doc-card">
-        <div class="imgwrap" data-lightbox="progsun1"><img src="images/img033.jpg" alt="Programme, Sunday May 19th"></div>
-        <div class="body">
-          <span class="tag">Programme text</span>
-          <h4>Programme, Sunday May 19th</h4>
-          <p>Consecration service and General Service in Lincoln Hall, led by President John J. Smallwood; Baccalaureate Sermon by Rev. Charles S. Morris of Norfolk.</p>
-        </div>
-      </div>
-      <div class="doc-card">
-        <div class="imgwrap" data-lightbox="progsun2mon1"><img src="images/img034.jpg" alt="Programme, Sunday 2:30 – Monday 1:30"></div>
-        <div class="body">
-          <span class="tag">Programme text</span>
-          <h4>Programme, Sunday 2:30 – Monday 1:30</h4>
-          <p>Sunday afternoon and evening sessions, then Monday’s formal dedication of Lincoln Memorial Hall, the Electric Plant, and the John Hay Wharf — with Gov. William Hodges Mann of Virginia presiding.</p>
-        </div>
-      </div>
-      <div class="doc-card">
-        <div class="imgwrap" data-lightbox="progtue"><img src="images/img040.jpg" alt="Programme, Monday evening – Tuesday"></div>
-        <div class="body">
-          <span class="tag">Programme text</span>
-          <h4>Programme, Monday evening – Tuesday</h4>
-          <p>The William’s Prize oratorical contest, the Farmers’ Congress, and Commencement Exercises for the Class of 1912 (valedictorian James E. Brown, salutatorian Charles Sumner Wilkinson).</p>
-        </div>
-      </div>
-      <div class="doc-card">
-        <div class="imgwrap" data-lightbox="proglincoln"><img src="images/img035.jpg" alt="Lincoln Hall, dedication exercises"></div>
-        <div class="body">
-          <span class="tag">Photograph</span>
-          <h4>Lincoln Hall, dedication exercises</h4>
-          <p>“Lincoln Hall, 133½ by 49½ feet, 4 story, built of brick, cement and stone … at a cost of $45,987. This Hall, to the honor of the Great Emancipator, is built near the very spot where the Second Cargo of Slaves landed May 24, 1624.”</p>
-        </div>
-      </div>
-      <div class="doc-card">
-        <div class="imgwrap" data-lightbox="progbagleyorig"><img src="images/img036.jpg" alt="“Bagley Hall” (before rebuilding)"></div>
+        <div class="imgwrap" data-lightbox="proglincoln"><img src="images/dedication-lincolnhall-engraving.jpg" alt="Lincoln Hall engraving, title page"></div>
         <div class="body">
           <span class="tag">Illustration</span>
-          <h4>“Bagley Hall” (before rebuilding)</h4>
-          <p>“First built in 1622–1649–1729 and 1808 and used as a Slave Barrack from 1624–1865, bought by President Smallwood in 1892, rebuilt by Dr. Smallwood 1907–08, at a cost of $10,000.00.”</p>
+          <h4>Lincoln Hall, dedication exercises title page</h4>
+          <p>"Lincoln Hall, 133½ by 49½ feet, 4 story, built of brick, cement and stone with every modern improvement, at a cost of $45,987. This Hall, to the honor of the Great Emancipator, is built near the very spot where the Second Cargo of Slaves landed May 24, 1624." Architect: Carl Ruehrmund.</p>
         </div>
       </div>
       <div class="doc-card">
-        <div class="imgwrap" data-lightbox="progbagleyrebuilt"><img src="images/img037.jpg" alt="Rebuilt “Old Bagley Hall”"></div>
+        <div class="imgwrap" data-lightbox="proghistory"><img src="images/dedication-brief-history-text.jpg" alt="“Brief History of a Great Work”"></div>
         <div class="body">
-          <span class="tag">Photograph</span>
-          <h4>Rebuilt “Old Bagley Hall”</h4>
-          <p>The rebuilt Bagley Hall fronting the campus, with Wharf Road and President Smallwood visible in the distance.</p>
+          <span class="tag">Programme text</span>
+          <h4>"Brief History of a Great Work"</h4>
+          <p>The programme's own institutional history: founded Oct. 12, 1892, in the old Hartwell Parker restaurant at Claremont; the "Old Claremont Wharf Tract" bought for $7,800 in 1894; Sawyer Hall built 1894–95 with funds from ex-Senator Philetus Sawyer; the land paid off in 1900–01 with help from D. Wilson Moore; "Old Bagley Hall" rebuilt 1906–07 for $10,500; Lincoln Memorial Hall contracted 1910–11 (Carl Ruehrmund, architect; D. J. Farrar, contractor) at $43,370, plus $15,800–$20,000 for the power house, electric plant, water plant, and sewerage — funded largely by Mrs. Clara S. Hay, "assisted in this effort by two white Southern ladies whose names cannot be mentioned here." School property was valued at $750,200 as of May 25, 1912; John Hay Wharf cost $3,797 in 1911; board and tuition were $8.50/month with an $8.50 entrance fee.</p>
         </div>
       </div>
-    
+      <div class="doc-card">
+        <div class="imgwrap" data-lightbox="progsmallwoodportrait"><img src="images/dedication-smallwood-portrait.jpg" alt="Portrait of Rev. John J. Smallwood, Ph.D., facing the Brief History page"></div>
+        <div class="body">
+          <span class="tag">Portrait</span>
+          <h4>Rev. John J. Smallwood, Ph. D.</h4>
+          <p>Facing page to the "Brief History": "Founder and President, Temperance, Industrial and Collegiate Institute, Claremont, Virginia, who has made it possible for the people of the South to dedicate Lincoln Hall."</p>
+        </div>
+      </div>
+      <div class="doc-card">
+        <div class="imgwrap" data-lightbox="proggovmann"><img src="images/dedication-gov-mann-portrait.jpg" alt="Gov. William Hodges Mann of Virginia"></div>
+        <div class="body">
+          <span class="tag">Portrait</span>
+          <h4>His Excellency, Gov. William Hodges Mann</h4>
+          <p>"His Excellency, Gov. William Hodges Mann, of Virginia" — who presided over Monday's formal dedication of Lincoln Memorial Hall, the Electric Plant, and the John Hay Wharf.</p>
+        </div>
+      </div>
+      <div class="doc-card">
+        <div class="imgwrap" data-lightbox="progsun1"><img src="images/dedication-sunday-program.jpg" alt="Programme, Sunday May 19th"></div>
+        <div class="body">
+          <span class="tag">Programme text</span>
+          <h4>Programme, Sunday, May 19th, 1912</h4>
+          <p>10:00 A.M. Consecration Service in Lincoln Hall, led by President John J. Smallwood; 10:45 A.M. General Service with anthem "The Gates of Pearl" (H. Wakefield Smith) and solo "Calvary" (Miss Gertrude M. Tellington), followed by the Baccalaureate Sermon from Rev. Charles S. Morris, D.D., Pastor of Bank Street Baptist Church, Norfolk, Va.</p>
+        </div>
+      </div>
+      <div class="doc-card">
+        <div class="imgwrap" data-lightbox="progsun2mon1"><img src="images/dedication-sunday-continued.jpg" alt="Programme, Sunday 2:30 P.M. and 7:30 P.M."></div>
+        <div class="body">
+          <span class="tag">Programme text</span>
+          <h4>Programme, Sunday afternoon &amp; evening</h4>
+          <p>2:30 P.M.: Dedicatorial Sermon, "God's Leading of Men," by Rev. Fred M. Estes of Boston (an old schoolmate of President Smallwood), followed by an address from Hon. John Mitchell, Jr., editor of the Richmond Planet. 7:30 P.M.: the Students' Annual Temperance Mass Meeting, with recitations, choruses, and an annual temperance address by Prof. T. S. Inborden, Principal of the Joseph K. Brick School, Brick, N.C.</p>
+          <p class="gallery-hint">2 pages — click to browse</p>
+        </div>
+      </div>
+      <div class="doc-card">
+        <div class="imgwrap" data-lightbox="progtue"><img src="images/dedication-monday-continued.jpg" alt="Programme, Monday continued and Tuesday Class Day"></div>
+        <div class="body">
+          <span class="tag">Programme text</span>
+          <h4>Programme, Monday's oratorical contest through Commencement</h4>
+          <p>Monday 7:30 P.M.'s William's Prize oratorical contest continues with student contestants and an address, "Does It Pay," by Rev. Dr. Chas. Edward Davis; Tuesday 11 A.M. brings Class Day Exercises on the campus, and the evening's Commencement Exercises for the Class of 1912 include the Salutatory by Charles Sumner Wilkinson and the Valedictory, "The Dignity of Labor," by James E. Brown.</p>
+          <p class="gallery-hint">2 pages — click to browse</p>
+        </div>
+      </div>
+      <div class="doc-card">
+        <div class="imgwrap" data-lightbox="progbagleyorig"><img src="images/dedication-bagleyhall-orig.jpg" alt="“Bagley Hall” (before rebuilding)"></div>
+        <div class="body">
+          <span class="tag">Illustration</span>
+          <h4>"Bagley Hall" ("Rebuilt Old Bagley Hall")</h4>
+          <p>"First built in 1622–1649–1729 and 1808 and used as a Slave Barrack from 1624–1865, bought by President Smallwood in 1892, rebuilt by Dr. Smallwood 1907–08, at a cost of $10,000.00." This thumbnail appears on the same page as the portrait of Rev. C. B. Henry.</p>
+        </div>
+      </div>
+      <div class="doc-card">
+        <div class="imgwrap" data-lightbox="progbagleyrebuilt"><img src="images/dedication-bagleyhall-rebuilt.jpg" alt="Rebuilt “Old Bagley Hall”"></div>
+        <div class="body">
+          <span class="tag">Photograph</span>
+          <h4>Rebuilt "Old Bagley Hall"</h4>
+          <p>"Rebuilt 'Old Bagley Hall' fronting the Campus. Wharf Road, President Smallwood in the distance."</p>
+        </div>
+      </div>
+
 <div class="doc-card">
   <div class="imgwrap" data-lightbox="progjohnhaywharf"><img src="images/IMG_3291.jpg" alt="The Rebuilt Old Claremont Wharf, now John Hay Wharf"></div>
   <div class="body">
     <span class="tag">Photograph</span>
-    <h4>The Rebuilt “Old Claremont Wharf,” Now John Hay Wharf</h4>
-    <p>Rebuilt by President John J. Smallwood and renamed in honor of his great, true friend, the late John Hay — scholar, lawyer, statesman, diplomat, and friend to the Negro race.</p>
+    <h4>The Rebuilt "Old Claremont Wharf," Now John Hay Wharf</h4>
+    <p>"Rebuilt by President John J. Smallwood and named in honor of his great, true friend, the late John Hay, scholar, lawyer, statesman, diplomat and friend to the Negro Race."</p>
   </div>
 </div>
 
@@ -1307,29 +1348,76 @@
   <div class="imgwrap" data-lightbox="progoldclaremontwharf"><img src="images/IMG_3290.jpg" alt="Old Claremont Wharf, 1624 landing site"></div>
   <div class="body">
     <span class="tag">Photograph</span>
-    <h4>“Old Claremont Wharf”</h4>
-    <p>Where the second “cargo” of Slaves was landed May 24, 1624, having been brought from Africa by George W. Whitaker of Yorkshire, England.</p>
+    <h4>"Old Claremont Wharf"</h4>
+    <p>"Where the second 'cargo' of Slaves was landed May 24, 1624, having been brought from Africa by George W. Whitaker of Yorkshire, England."</p>
   </div>
 </div>
-  
+
   <div class="doc-card">
-        <div class="imgwrap" data-lightbox="progmayflower"><img src="images/img038.jpg" alt="D. Wilson Moore, Barn, “Mayflower” Cottage"></div>
+        <div class="imgwrap" data-lightbox="progmayflower"><img src="images/dedication-mayflower.jpg" alt="D. Wilson Moore, Barn, “Mayflower” Cottage"></div>
         <div class="body">
           <span class="tag">Photograph</span>
-          <h4>D. Wilson Moore, Barn, “Mayflower” Cottage</h4>
-          <p>The barn stable, the Mayflower Cottage, and the cabbage field — named for D. Wilson Moore, credited in the programme as a major benefactor who helped pay off the Institute’s land in 1900–01.</p>
+          <h4>D. Wilson Moore, Barn, "Mayflower" Cottage</h4>
+          <p>"D. Wilson Moore, Barn Stable the 'Mayflower' Cottage and the Cabbage Field" — named for D. Wilson Moore, credited in the "Brief History" as a major benefactor who helped pay off the Institute's land in 1900–01.</p>
         </div>
       </div>
 
   <div class="doc-card">
-        <div class="imgwrap" data-lightbox="progshed"><img src="images/img039.jpg" alt="Shed and farm tools"></div>
+        <div class="imgwrap" data-lightbox="progshed"><img src="images/dedication-shed.jpg" alt="Shed and farm tools"></div>
         <div class="body">
           <span class="tag">Photograph</span>
           <h4>Shed and farm tools</h4>
-          <p>“All of the valuable farm tools are kept under a shed when not in actual service” — part of the programme’s documentation of the Institute’s working farm.</p>
+          <p>"Shed and Farm Tools. — All of the valuable farm tools are kept under a shed when not in actual service."</p>
+        </div>
+      </div>
+
+  <div class="doc-card">
+        <div class="imgwrap" data-lightbox="progsawyer"><img src="images/IMG_3319.jpg" alt="Old Sawyer Hall"></div>
+        <div class="body">
+          <span class="tag">Photograph</span>
+          <h4>Old Sawyer Hall</h4>
+          <p>"Old Sawyer Hall, built by President Smallwood and his pupils, 1894–05. Named in honor of the late Philetus Sawyer, U.S. Senator from Wisconsin."</p>
+        </div>
+      </div>
+
+  <div class="doc-card">
+        <div class="imgwrap" data-lightbox="progdeneenestes"><img src="images/dedication-deneen-portrait.jpg" alt="Gov. Charles S. Deneen and Rev. Fred M. Estes"></div>
+        <div class="body">
+          <span class="tag">Portraits</span>
+          <h4>Hon. Charles S. Deneen &amp; Rev. Fred M. Estes</h4>
+          <p>"His Excellency, Hon. Charles S. Deneen, Governor of Illinois, Home State of President Lincoln, who is invited to speak Monday, May 20th, Dedication Day of Lincoln Hall" — paired in the programme with Rev. Fred M. Estes of Boston, who preached the Sunday Dedicatorial Sermon and was an old schoolmate of President Smallwood.</p>
+          <p class="gallery-hint">2 portraits — click to browse</p>
+        </div>
+      </div>
+
+  <div class="doc-card">
+        <div class="imgwrap" data-lightbox="progjonesahenry"><img src="images/dedication-davidjones-portrait.jpg" alt="Rev. David Jones and Rev. C. B. Henry"></div>
+        <div class="body">
+          <span class="tag">Portraits</span>
+          <h4>Rev. David Jones &amp; Rev. C. B. Henry</h4>
+          <p>"Rev. David Jones, Scranton, Pa., who is a staunch friend of Dr. Smallwood and the Institution, who will speak Tuesday night, May 21st at 7:30 o'clock P.M." — paired with Rev. C. B. Henry, Pastor of Fairview Methodist Episcopal Church, Binghamton, N.Y.</p>
+          <p class="gallery-hint">2 portraits — click to browse</p>
         </div>
       </div>
     </div>
+
+    <details class="transcript">
+      <summary>Read the full order of exercises, Sunday–Tuesday, May 19–21, 1912</summary>
+      <div class="transcript-body">
+        <p><em>Transcribed in full from the recovered souvenir programme (Illinois State Historical Library, accession no. 97453).</em></p>
+        <p><strong>Sunday, May 19th, 1912</strong></p>
+        <p>10:00 A.M. — Consecration Service in Lincoln Hall, led by President John J. Smallwood, Ph. D. 10:45 A.M. — General Service: Invocation; Congregational Singing; Responsive Scripture Reading; Congregational Singing; Second Scripture Reading; Anthem, "The Gates of Pearl" (H. Wakefield Smith), by the Choir; Prayer; Solo, "Calvary" (Rodney), Miss Gertrude M. Tellington; Baccalaureate Sermon by Rev. Charles S. Morris, D.D., Pastor Bank Street Baptist Church, Norfolk, Va.; Prayer; Quartette, "Come Ye Disconsolate" (Alfred Johnson), Misses Fultz, Moore and Messrs. Johnson, Baker; Benediction.</p>
+        <p>2:30 P.M. — Scripture Reading; Congregational Singing; Prayer; Quartette, "O Lord Most Merciful" (F. W. Williams), Misses Fultz, Moore and Messrs. Johnson, Baker; Dedicatorial Sermon, "God's Leading of Men," Rev. Fred M. Estes, Boston, Mass.; Prayer; Old Plantation Melody, "Somebody is Knocking at Your Door"; Address by Hon. John Mitchell, Jr., Editor, Richmond Planet, Richmond, Va.; Benediction.</p>
+        <p>7:30 P.M. — Students' Annual Temperance Mass Meeting: Temperance Chorus; Prayer; Temperance Chorus; "The Cause of Woe" ("Rams Horn"), Miss Laura A. Jasper, Mattoax, Va.; "Drink and Drunkards" ("Rams Horn"), Master J. Arthur Miller, Waverly, Va.; Trio, "Battle Song" (Fillmore), Misses Powell, Walker and Master Hurst; "Prohibition the Hope of Our Country" (W. Jennings Demorest), Miss Rosa Byrd, Suffolk, Va.; "The Result of Prohibition" (W. Jennings Demorest), Miss Arosia P. Beaman, Gatesville, N.C.; Temperance Chorus; Annual Temperance Address by Prof. T. S. Inborden, Principal, Joseph K. Brick School, Brick, N.C.; Benediction.</p>
+        <p><strong>Monday, May 20th, 1912</strong></p>
+        <p>1:30 P.M. — The Dedication of Lincoln Memorial Hall, the Electric Plant and the John Hay Wharf, His Excellency Hon. William Hodges Mann, Governor of Virginia, Presiding: Chorus, "Oh, Hail Us, Ye Free" (Chorus from "Ernani," Giuseppe Verdi); Prayer; Opening remarks by President John J. Smallwood, Ph. D.; Paper on Lincoln by Miss F. Esther Ridley, Oxford, N.C.; Chorus, "The Old Flag" (Selected), by the School; the introduction of Hon. W. Stanley Burt by Pres. Smallwood; introduction of Gov. Mann by Hon. W. Stanley Burt, Attorney for the Institution; Solo, "The Rosary" (Ethelbert Nevin), Miss Gertrude M. Tellington; Benediction. The programme notes that Gov. Charles S. Deneen of Illinois was expected to address the dedication "provided injuries sustained in an accident will permit him to be present."</p>
+        <p>7:30 P.M. — Oratorical Contest for the William's Prize: "Anvil Chorus" (Verdi); Charge to Contestants, Miss Rebecca E. Fultz, Roanoke, Va.; Honorary Speakers — "The Honored Dead" (Henry Ward Beecher), Mr. Baily Stevenson, North Fork, Va.; "On the Trail of a Murderer" (Daniel Webster), Mr. Richmond N. Baily, Homeville, Va.; Solo, "My Task" (E. L. Ashford), Mr. Charles S. Wilkinson. Student contestants: "Death Bed of Benedict Arnold" (George Leppard), Miss Lettie M. Flowers, Carlesy, Va.; "The True Grandeur of Nations" (Charles Sumner), Miss Mamie L. Williams, Williamsburg, Va.; "Frederick Douglass, at Arlington Cemetery on Decoration Day," Miss Gertrude M. Tellington, Goldsboro, N.C. Chorus, "Bright Years of Youth" (Carl Wilhelm), by the School; Decision of Judges; Awarding of Prize; Address to Students, "Does It Pay," Rev. Dr. Chas. Edward Davis, West Lynn, Mass.; Chorus, "Our Alma Mater" (Selected), by the School; Benediction.</p>
+        <p><strong>Tuesday, May 21st, 1912</strong></p>
+        <p>11 A.M. — Class Day Exercises on the Campus: Music by the Band; Remarks by Class President Mr. James E. Brown; History of Class, Miss Maggie M. Tonkins; Music; Class Prophesy, Miss Rebecca E. Fultz; Class Poem, Mr. L. B. Lucas; Music; Class Orator, Mr. Franklin H. Howell; Class Will, Mr. Charles S. Wilkinson; Class Song, Miss Mary L. Calvert.</p>
+        <p>2:30 P.M. — Farmers' Congress and Educational Mass Meeting in Lincoln Hall, President James B. Dudley, A. and M. College, Greensboro, N.C., Presiding: Prayer; Music; Introduction of President James B. Dudley; Address to Farmers by President Dudley; Music; Introduction of Rev. Clinton B. Henry, Binghamton, N.Y.; Annual Address to the Farmers, "Not on My Beat," Rev. Clinton B. Henry; Music; Benediction. "All Farmers and Land Owners are invited to take part in this Program."</p>
+        <p>7:30 P.M. — Commencement Exercises of Class 1912: Commencement Song (Alfred Murray), Female Chorus; Salutatory, "Education the Solution of All Racial Problems," Mr. Charles Sumner Wilkinson, Williamsburg, Va.; "The Formation of Character," Miss Mary L. Calvert, Margaretsville, N.C.; "The Incompatibility of the Times," Mr. L. B. Lucas, Rocky Mount, N.C.; Solo, "Sweet Wild Rose" (H. Trotene), Miss Rebecca E. Fultz; "An Uncrowned King," Miss Maggie M. Tonkins, Hampton, Va.; "John Hay," Mr. Franklin H. Howell, Alliance, Va.; Valedictory, "The Dignity of Labor," Mr. James E. Brown, Tupelo, Va.; Chorus, "In Alma Mater Praise" (Lantoze); Annual Address to Graduates, "The Deliverer and His Qualifications," Rev. David Jones, Scranton, Pa.; Awarding of Diplomas and of Prizes; Benediction.</p>
+      </div>
+    </details>
   </section>
 
   <!-- COMMUNITY -->
@@ -1527,16 +1615,35 @@
     interview2: [{src:"images/img076.jpg", cap:"Full clipping, columns 1–2"}, {src:"images/img077.jpg", cap:"Full clipping, columns 1–2 (cont.)"}],
     interview3: [{src:"images/img078.jpg", cap:"Full clipping, columns 3–4"}, {src:"images/img079.jpg", cap:"Full clipping, columns 3–4 (cont.)"}],
     interview4: [{src:"images/img080.jpg", cap:"Full clipping, columns 5–6"}, {src:"images/img081.jpg", cap:"Full clipping, columns 5–6 (cont.)"}],
-    progcover: [{src:"images/img082.jpg", cap:"Souvenir Programme cover, Dedication of Lincoln Memorial Hall, 1912"}],
-    proghistory: [{src:"images/img083.jpg", cap:"\u201cBrief History of a Great Work,\u201d from the 1912 souvenir programme"}],
-    progsun1: [{src:"images/img084.jpg", cap:"Programme, Sunday May 19th, 1912"}],
-    progsun2mon1: [{src:"images/img085.jpg", cap:"Programme continued, Sunday 2:30 P.M. \u2013 Monday 20th, 1:30 P.M."}],
-    progtue: [{src:"images/img091.jpg", cap:"Programme continued, Monday evening \u2013 Tuesday, May 21st, 1912"}],
-    proglincoln: [{src:"images/img086.jpg", cap:"Lincoln Hall, dedication exercises, May 1912"}],
-    progbagleyorig: [{src:"images/img087.jpg", cap:"\u201cBagley Hall\u201d before its 1907-08 rebuilding"}],
-    progbagleyrebuilt: [{src:"images/img088.jpg", cap:"Rebuilt \u201cOld Bagley Hall\u201d fronting the campus"}],
-    progmayflower: [{src:"images/img089.jpg", cap:"D. Wilson Moore, barn stable, the \u201cMayflower\u201d cottage, and the cabbage field"}],
-    progshed: [{src:"images/img090.jpg", cap:"Shed and farm tools on the Institute grounds"}],
+    progcover: [{src:"images/dedication-cover.jpg", cap:"Souvenir Programme cover, Dedication of Lincoln Memorial Hall, 1912"}],
+    proglincoln: [{src:"images/dedication-lincolnhall-engraving.jpg", cap:"Lincoln Hall engraving and dedication exercises title page, May 1912"}],
+    proghistory: [{src:"images/dedication-brief-history-text.jpg", cap:"\u201cBrief History of a Great Work,\u201d from the 1912 souvenir programme"}],
+    progsmallwoodportrait: [{src:"images/dedication-smallwood-portrait.jpg", cap:"Rev. John J. Smallwood, Ph. D., facing the \u201cBrief History\u201d page"}],
+    proggovmann: [{src:"images/dedication-gov-mann-portrait.jpg", cap:"His Excellency, Gov. William Hodges Mann, of Virginia"}],
+    progsun1: [{src:"images/dedication-sunday-program.jpg", cap:"Programme, Sunday May 19th, 1912"}],
+    progsun2mon1: [
+      {src:"images/dedication-sunday-continued.jpg", cap:"Programme continued, Sunday 2:30 P.M. and 7:30 P.M., 1912"},
+      {src:"images/dedication-monday-dedication.jpg", cap:"Programme continued, Monday 1:30 P.M. dedication and 7:30 P.M. oratorical contest, 1912"}
+    ],
+    progtue: [
+      {src:"images/dedication-monday-continued.jpg", cap:"Programme continued, Monday oratorical contest and Tuesday Class Day, 1912"},
+      {src:"images/dedication-farmers-commencement.jpg", cap:"Programme continued, Tuesday Farmers\u2019 Congress and Commencement, 1912"}
+    ],
+    progbagleyorig: [{src:"images/dedication-bagleyhall-orig.jpg", cap:"\u201cBagley Hall\u201d (\u201cRebuilt Old Bagley Hall\u201d), with its 1622\u20131808 history and 1907-08 rebuilding"}],
+    progbagleyrebuilt: [{src:"images/dedication-bagleyhall-rebuilt.jpg", cap:"Rebuilt \u201cOld Bagley Hall\u201d fronting the campus"}],
+    progjohnhaywharf: [{src:"images/IMG_3291.jpg", cap:"The rebuilt \u201cOld Claremont Wharf,\u201d now John Hay Wharf, renamed for John Hay"}],
+    progoldclaremontwharf: [{src:"images/IMG_3290.jpg", cap:"\u201cOld Claremont Wharf,\u201d where the second \u201ccargo\u201d of Slaves was landed May 24, 1624"}],
+    progmayflower: [{src:"images/dedication-mayflower.jpg", cap:"D. Wilson Moore, barn stable, the \u201cMayflower\u201d cottage, and the cabbage field"}],
+    progshed: [{src:"images/dedication-shed.jpg", cap:"Shed and farm tools on the Institute grounds"}],
+    progsawyer: [{src:"images/IMG_3319.jpg", cap:"Old Sawyer Hall, built by President Smallwood and his pupils, 1894\u201305, named for Sen. Philetus Sawyer"}],
+    progdeneenestes: [
+      {src:"images/dedication-deneen-portrait.jpg", cap:"His Excellency, Hon. Charles S. Deneen, Governor of Illinois"},
+      {src:"images/dedication-estes-portrait.jpg", cap:"Rev. Fred M. Estes, Boston, Mass., an old schoolmate of President Smallwood"}
+    ],
+    progjonesahenry: [
+      {src:"images/dedication-davidjones-portrait.jpg", cap:"Rev. David Jones, Scranton, Pa."},
+      {src:"images/dedication-henry-portrait.jpg", cap:"Rev. C. B. Henry, Pastor of Fairview Methodist Episcopal Church, Binghamton, N.Y."}
+    ],
   };
 
   const lb = document.getElementById('lightbox');
